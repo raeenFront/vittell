@@ -1,0 +1,384 @@
+@font-face {
+  font-family: iranyekan;
+  font-style: normal;
+  font-weight: bold;
+  src: url('/fonts/eot/iranyekanwebboldfanum.eot');
+  src: url('/fonts/eot/iranyekanwebboldfanum.eot?#iefix')
+      format('embedded-opentype'),
+    url('/fonts/woff/iranyekanwebboldfanum.woff') format('woff'),
+    url('/fonts/ttf/iranyekanwebboldfanum.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: iranyekan;
+  font-style: normal;
+  font-weight: 100;
+  src: url('/fonts/eot/iranyekanwebthinfanum.eot');
+  src: url('/fonts/eot/iranyekanwebthinfanum.eot?#iefix')
+      format('embedded-opentype'),
+    url('/fonts/woff/iranyekanwebthinfanum.woff') format('woff'),
+    url('/fonts/ttf/iranyekanwebthinfanum.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: iranyekan;
+  font-style: normal;
+  font-weight: 300;
+  src: url('/fonts/eot/iranyekanweblightfanum.eot');
+  src: url('/fonts/eot/iranyekanweblightfanum.eot?#iefix')
+      format('embedded-opentype'),
+    url('/fonts/woff/iranyekanweblightfanum.woff') format('woff'),
+    url('/fonts/ttf/iranyekanweblightfanum.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: iranyekan;
+  font-style: normal;
+  font-weight: normal;
+  src: url('/fonts/eot/iranyekanwebregularfanum.eot');
+  src: url('/fonts/eot/iranyekanwebregularfanum.eot?#iefix')
+      format('embedded-opentype'),
+    url('/fonts/woff/iranyekanwebregularfanum.woff') format('woff'),
+    url('/fonts/ttf/iranyekanwebregularfanum.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: iranyekan;
+  font-style: normal;
+  font-weight: 500;
+  src: url('/fonts/eot/iranyekanwebmediumfanum.eot');
+  src: url('/fonts/eot/iranyekanwebmediumfanum.eot?#iefix')
+      format('embedded-opentype'),
+    url('/fonts/woff/iranyekanwebmediumfanum.woff') format('woff'),
+    url('/fonts/ttf/iranyekanwebmediumfanum.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: iranyekan;
+  font-style: normal;
+  font-weight: 800;
+  src: url('/fonts/eot/iranyekanwebextraboldfanum.eot');
+  src: url('/fonts/eot/iranyekanwebextraboldfanum.eot?#iefix')
+      format('embedded-opentype'),
+    url('/fonts/woff/iranyekanwebextraboldfanum.woff') format('woff'),
+    url('/fonts/ttf/iranyekanwebextraboldfanum.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: iranyekan;
+  font-style: normal;
+  font-weight: 900;
+  src: url('/fonts/eot/iranyekanwebblackfanum.eot');
+  src: url('/fonts/eot/iranyekanwebblackfanum.eot?#iefix')
+      format('embedded-opentype'),
+    url('/fonts/woff/iranyekanwebblackfanum.woff') format('woff'),
+    url('/fonts/ttf/iranyekanwebblackfanum.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: iranyekan;
+  font-style: normal;
+  font-weight: 950;
+  src: url('/fonts/eot/iranyekanwebextrablackfanum.eot');
+  src: url('/fonts/eot/iranyekanwebextrablackfanum.eot?#iefix')
+      format('embedded-opentype'),
+    url('/fonts/woff/iranyekanwebextrablackfanum.woff') format('woff'),
+    url('/fonts/ttf/iranyekanwebextrablackfanum.ttf') format('truetype');
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-size: 1.6rem;
+  overflow: hidden !important;
+  font-family: iranyekan !important;
+  background-color: #f1f2f2;
+}
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  overflow-x: hidden;
+  direction: rtl;
+}
+
+.Toastify__toast--error {
+  width: 300px !important;
+  margin-top: 20px !important;
+  border-radius: 10px !important;
+}
+
+.Toastify__toast--success {
+  width: 300px !important;
+  margin-top: 20px !important;
+  border-radius: 10px !important;
+}
+
+.Toastify__toast--default {
+  width: 300px !important;
+  margin-top: 20px !important;
+  border-radius: 10px !important;
+}
+
+.Toastify__toast-body {
+  padding-right: 20px !important;
+  font-size: 15px !important;
+  text-align: right !important;
+  font-family: "IRANYekan" !important;
+}
+
+a {
+  color: inherit;
+  text-decoration: none !important;
+  cursor: pointer;
+}
+p {
+  text-align: justify;
+  font-size: 1.2rem;
+  color: rgb(35, 31, 32);
+}
+* {
+  box-sizing: border-box;
+}
+input,
+label,
+li,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+Button,
+select,
+Textarea {
+  font-family: IRANYekan !important;
+}
+.discount-slider .slick-list {
+  overflow: visible !important;
+}
+
+.slick-next:before,
+.slick-prev:before {
+  background-color: #ffffff82;
+  position: absolute;
+  top: -2rem;
+  color: black;
+  width: 3rem;
+  height: 4rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 0.8rem;
+}
+
+.labales {
+  background: #aaa;
+  padding: 6px 20px;
+  font-size: 13px;
+  color: #fff;
+  font-family: 'iranyekan';
+  font-weight: 800;
+  font-size: 11px;
+  border-radius: 20px;
+  margin-left: 10px;
+  margin-bottom: 15px;
+  box-shadow: 0px 7px 15px 0px rgb(0 0 0 / 4%);
+}
+
+.paragraphPost {
+  color: #4C4C4C !important;
+  width: 100%;
+  border: none;
+  overflow: hidden;
+  font-size: 1.3rem;
+  outline: none !important;
+  font-weight: 800;
+  line-height: 2rem;
+}
+
+.paragraphPost2 {
+  color: #4C4C4C !important;
+  width: 100%;
+  border: none;
+  overflow: hidden;
+  font-size: 1.3rem;
+  outline: none !important;
+  font-weight: 800;
+  line-height: 2rem;
+  border: none;
+  overflow: hidden;
+  margin: 10px 5px 0px 0px;
+  width: 100%;
+}
+
+.paragraphPost2:disabled {
+  color: #888 !important;
+  width: 100%;
+  border: none;
+  overflow: hidden;
+  font-size: 1.3rem;
+  outline: none !important;
+  font-weight: 800;
+  line-height: 2rem;
+  border: none;
+  overflow: hidden;
+  margin: 10px 5px 0px 0px;
+  width: 100%;
+}
+
+.paragraphPost:disabled {
+  color: #211d70 !important;
+  width: 100% !important;
+  outline: none !important;
+  border: none !important;
+  overflow: hidden !important;
+  font-size: 1.3rem !important;
+  background: #fafafa !important;
+  font-weight: 800 !important;
+  line-height: 2rem !important;
+}
+
+.slick-next:before {
+  left: -3rem;
+}
+
+.slick-prev:before {
+  right: -3rem;
+}
+
+.slick-dots li button {
+  display: none !important;
+}
+.slick-prev,
+.slick-next {
+  z-index: 5;
+  position: absolute;
+}
+.slick-slider .slick-track,
+.slick-slider .slick-list {
+  border-radius: 1rem;
+}
+
+.makeStyles-avatorImageBox-407 svg {
+  font-size: 4rem !important;
+}
+
+.AddProfileIcon {
+  font-size: 25px;
+  color: rgb(252, 0, 0);
+  padding: 0px 11px;
+  border-radius: 20px;
+  position: absolute;
+  top: 40px;
+  right: 17px;
+}
+
+.AddWallIcon {
+  background:  rgb(252, 0, 0);;
+  font-size: 25px;
+  color: white;
+  padding: 0px 11px;
+  border-radius: 100px;
+  position: relative;
+  top: 2px;
+  left: 4px;
+}
+
+::placeholder {
+  color:#4C4C4C ;
+  font-size: 1.3rem;
+  font-weight: 500;
+}
+.MuiButton-root {
+  font-size: 1.2rem !important;
+}
+
+.MuiImageListItem-imgFullHeight {
+  position: absolute !important;
+  left: -100px !important;
+  transform: none !important;
+}
+
+/*** iPhone and iOS Form Input Zoom Fixes ***/
+/* Fix Input Zoom on devices older than iPhone 5: */
+@media screen and (device-aspect-ratio: 2/3) {
+  select,
+  textarea,
+  input[type='text'],
+  input[type='password'],
+  input[type='datetime'],
+  input[type='datetime-local'],
+  input[type='date'],
+  input[type='month'],
+  input[type='time'],
+  input[type='week'],
+  input[type='number'],
+  input[type='email'],
+  input[type='url'] {
+    font-size: 16px;
+  }
+}
+
+/* Fix Input Zoom on iPhone 5, 5C, 5S, iPod Touch 5g */
+@media screen and (device-aspect-ratio: 40/71) {
+  select,
+  textarea,
+  input[type='text'],
+  input[type='password'],
+  input[type='datetime'],
+  input[type='datetime-local'],
+  input[type='date'],
+  input[type='month'],
+  input[type='time'],
+  input[type='week'],
+  input[type='number'],
+  input[type='email'],
+  input[type='url'] {
+    font-size: 16px;
+  }
+}
+
+/* Fix Input Zoom on iPhone 6, iPhone 6s, iPhone 7  */
+@media screen and (device-aspect-ratio: 375/667) {
+  select,
+  textarea,
+  input[type='text'],
+  input[type='password'],
+  input[type='datetime'],
+  input[type='datetime-local'],
+  input[type='date'],
+  input[type='month'],
+  input[type='time'],
+  input[type='week'],
+  input[type='number'],
+  input[type='email'],
+  input[type='tel'],
+  input[type='url'] {
+    font-size: 16px;
+  }
+}
+
+/* Fix Input Zoom on iPhone 6 Plus, iPhone 6s Plus, iPhone 7 Plus, iPhone 8, iPhone X, XS, XS Max  */
+@media screen and (device-aspect-ratio: 9/16) {
+  select,
+  textarea,
+  input[type='text'],
+  input[type='password'],
+  input[type='datetime'],
+  input[type='datetime-local'],
+  input[type='date'],
+  input[type='month'],
+  input[type='time'],
+  input[type='week'],
+  input[type='number'],
+  input[type='email'],
+  input[type='tel'],
+  input[type='url'] {
+    font-size: 16px;
+  }
+}

@@ -1,0 +1,91 @@
+import React, { Fragment } from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import { theme } from "../theme";
+import { Box, Grid } from "@material-ui/core";
+import Link from "next/link";
+
+const primary = theme.palette.primary.main;
+const secondary = theme.palette.secondary.main;
+const white = theme.palette.common.white;
+const colorDescription = theme.palette.initial.main
+
+const BlogBox = ({ off, from, id, homePic, description, href, Offer }) => {
+  const classes = useStyles();
+
+  return (
+    <Grid id={id ? id : ""} style={{ width: "100%" }}>
+      <Link href={href}>
+        <Box
+          className={classes.sliderItemBox}
+          // width="50%"
+          style={{}}
+          overflow="hidden"
+          display="flex"
+          alignItems="center"
+          flexDirection="column"
+          mb={2}
+        >
+          <Box
+            overflow="hidden"
+            mb={0.5}
+            className={classes.sliderBoxPic}
+            boxShadow={3}
+            width="92%"
+          >
+            {Offer && off !== 0 ? (
+              <p className={classes.PostOff}>%{off}</p>
+            ) : (
+              ""
+            )}
+            <img
+              style={{ marginBottom: "-5px" }}
+              src={homePic}
+              width="100%"
+              height="auto"
+            />
+          </Box>
+          <Box component="span" textAlign="right" width="100%" mr={2}>
+            {description}
+          </Box>
+        </Box>
+      </Link>
+    </Grid>
+  );
+};
+
+const useStyles = makeStyles({
+  sliderItemBox: {
+    "& img": {
+      objectFit: "cover"
+    },
+    "& span": {
+      fontSize: "1.3rem",
+      fontWeight: "800",
+      color: colorDescription,
+      textOverflow: "ellipsis",
+      overflow: "hidden",
+      direction: "rtl",
+      width: "74%",
+      marginRight: "-17px",
+      fontSize: "1.4rem",
+      fontWeight: "bold",
+      marginTop: "5px"
+    }
+  },
+  sliderBoxPic: {
+    position: "relative",
+    borderRadius: "1rem",
+    border: `1px solid #211d7073`
+  },
+  PostOff: {
+    bottom: "-7px",
+    position: "absolute",
+    color: "#ffffff",
+    background: "#ff8600",
+    padding: "7px",
+    borderRadius: "10px",
+    left: "5px"
+  }
+});
+
+export default BlogBox;
