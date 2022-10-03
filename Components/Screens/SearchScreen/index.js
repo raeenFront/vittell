@@ -64,17 +64,18 @@ const SearchScreenIndex = () => {
   const [AllPosts, setAllPosts] = useState([]);
   const [LoadingPost, setLoadingPost] = useState(true);
   const [showSelectCategoryModal, setShowSelectCategoryModal] = useState(false);
-  const [category, setCategory] = useState(null);
   const [PostLeinght, setPostLeinght] = useState(16);
-
+  
   const ChangeSearchType = (event) => {
     setSearchType(event);
   };
-
+  
   const PostID = typeof window !== "undefined" ? localStorage.getItem("PostID") || '1' : '1';
   const SearchInputs = typeof window !== "undefined" ? JSON.parse(localStorage.getItem("SearchInputs")) || '{}' : '{}';
-
+  
+  const [category, setCategory] = useState(null);
   const [Search, setSearch] = useState(SearchInputs?.title ? SearchInputs?.title : "");
+
 
   // mrx : Search
   const handleSearch = (status) => {
@@ -133,7 +134,6 @@ const SearchScreenIndex = () => {
   }, [LoadingPost])
 
   useEffect(() => {
-
     setSearch(SearchInputs?.title);
     setCategory(SearchInputs?.category);
     setSearchType(SearchInputs?.searchType ? SearchInputs?.searchType : 1);
@@ -143,7 +143,7 @@ const SearchScreenIndex = () => {
 
     if (SearchInputs?.title?.length === undefined) {
       // mrx : get All Posts
-      GetUrl(GET_ALL_SEARCH_POSTS + `?cityId=${Cookies.get("CITID")}`).then((res, err) => {
+      GetUrl(GET_ALL_SEARCH_POSTS + `?cityId=${Cookies.get("CITID")}` + `${SearchInputs?.category!==null?'&categoryId='+SearchInputs?.category?.id : ''}`).then((res, err) => {
         if (res && res?.status === 200) {
           const data = res?.data?.data;
           setAllPosts(data);
@@ -237,7 +237,7 @@ const SearchScreenIndex = () => {
 
       </Box>
 
-      <Grid style={{ display: " inline-flex" }}>
+      <Grid style={{ display: " inline-flex",width:'100%' }}>
         <Box style={{ width: "50%" }} flexWrap='wrap' mb={10}>
           {
             LoadingPost ? (
@@ -252,7 +252,8 @@ const SearchScreenIndex = () => {
                       key={item?.id}
                       href={`posts/${item?.id}`}
                       homePic={BASE_Image_Url + item?.image}
-                      description={item?.title}
+                      title={item?.title}
+                      description={item?.description}
                     />
                   ))}
               </>
@@ -283,7 +284,8 @@ const SearchScreenIndex = () => {
                       key={item?.id}
                       href={`posts/${item?.id}`}
                       homePic={BASE_Image_Url + item?.image}
-                      description={item?.title}
+                      title={item?.title}
+                      description={item?.description}
                     />
                   ))}
               </>

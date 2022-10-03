@@ -1,6 +1,7 @@
 import React from 'react';
 import { Box, Button, Container, Grid } from '@material-ui/core';
-import ArrowBackIosRoundedIcon from '@material-ui/icons/ArrowBackIosRounded';
+import ArrowBackIosRoundedIcon from '@material-ui/icons/ExpandMore';
+// import ArrowBackIosRoundedIcon from '@material-ui/icons/ArrowBackIosRounded';
 import { theme } from '../../../theme';
 import DiscountSlider from './DiscountSlider';
 import TitleBox from '../../../Common/TitleBox';
@@ -42,13 +43,13 @@ const DiscountIndex = () => {
                     style={{marginBottom:"6rem"}}>
 
                     <TitleBox
-                        title='پرتخفیف ها'
+                        title='تخفیف دارها'
                     />
 
                     <Button variant="text" color='inherit' endIcon={<ArrowBackIosRoundedIcon />} onClick={() => {
                         alert('همه تخفیف ها');
-                    }}>
-                        همه
+                    }} style={{color:'#9f9f9d'}}>
+                        دیدن همه &nbsp;
                     </Button>
                 </Grid>
 

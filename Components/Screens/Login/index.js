@@ -101,12 +101,12 @@ const LoginIndex = () => {
 
             <Box mt={5} display='flex' width='100%' flexDirection='column' justifyContent='center' alignItems='center'>
               <TextFieldItem
-                inputProps='شماره'
+                inputProps='شماره تماس :'
                 type="number"
                 onChange={(e) => setMobile(e.target.value)}
               />
               <TextFieldItem
-                inputProps='رمز عبور'
+                inputProps='رمز عبور:'
                 onChange={(e) => setPassword(e.target.value)}
                 type={passwordShow ? 'text' : 'password'}
                 icon={
@@ -124,12 +124,13 @@ const LoginIndex = () => {
 
 
             <Box mt={2} width='100%' textAlign='center'>
-              <a onClick={() => Router.push("/ResetPassword")} className={classes.forgetPasswordLink}>رمز عبور خود را فراموش کرده ام</a>
+              <a onClick={() => Router.push("/ResetPassword")} className={classes.forgetPasswordLink}> رمز عبور خود را فراموش کرده ام &#9785;</a>
             </Box>
+            <div style={{ borderBottom: '2px solid #bbb', padding: '1px', width: '100%', marginBottom: '10px',marginTop:'20px' }}></div>
 
-            <Box mt={5} width='100%' textAlign='center' className={classes.buttonSignUp}>
-              <Button style={{ margin: "0px 10px", color: "#fff", backgroundColor: "#ff0000" }} onClick={() => handleLogin()} variant="contained" width='30%'>ورود</Button>
-              <Button style={{ margin: "0px 10px" }} onClick={() => Router.push({ pathname: '/register' })} variant="contained" width='30%'>ثبت نام</Button>
+            <Box mt={5} width='100%' textAlign='center' className={classes.buttonSignUp} style={{marginTop:'20px'}}>
+              <Button style={{ margin: "0px 10px", color: "#fff", backgroundColor: "rgb(239 75 76)",borderRadius:'10px' }} onClick={() => handleLogin()} variant="contained" width='30%'>ورود</Button>
+              <Button style={{ margin: "0px 10px",borderRadius:'10px' }} onClick={() => Router.push({ pathname: '/register' })} variant="contained" width='30%'>ثبت نام</Button>
             </Box>
             {/* <a onClick={() => Router.push({ pathname: '/register' })} style={{ marginTop: 20 }} className={classes.forgetPasswordLink}>اکانت کاربری ندارم !</a> */}
 

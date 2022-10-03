@@ -128,3 +128,8 @@ export const GET_DEFULT_CITY = `${BASE_URL}/Setting/GetDefaultCity`;
 
 // mrx : pine to bussines
 export const PINE_TO_B = `${BASE_URL}/User/PinBussines`;
+
+//get user price list
+export const GET_USER_PRICE_LIST =(userId)=> `${BASE_URL}/User/GetUserPrice/${userId}`;
+//edit user price list
+export const EDIT_PRICE_LIST = `${BASE_URL}/User/EditUserPrice`;

@@ -27,7 +27,7 @@ import { PostUrl, PostAuthUrl, GetAuthUrl, GetUrl } from '../../../pages/api/con
 import Cookies from 'js-cookie';
 
 // mrx : material ui
-import AddIcon from '@material-ui/icons/Add';
+import AddIcon from '@material-ui/icons/AddCircleOutline';
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 import AddAPhotoIcon from '@material-ui/icons/AddAPhoto';
 import TextareaAutosize from '@material-ui/core/TextareaAutosize';
@@ -79,8 +79,8 @@ const useStyles = makeStyles({
         background: "#fff",
         height: "100px",
         // border: '2px solid  rgb(239 75 76)',
-        borderRadius: '10px',
-        width: '40%',
+        borderRadius: '4px',
+        width: '49%',
         fontSize: "15px !important",
 
 
@@ -109,25 +109,30 @@ const useStyles = makeStyles({
         borderRadius: '.5rem',
         width: '95%',
         padding: '1rem',
-        fontWeight: '800'
+        fontWeight: '800',
+        marginTop:'10px',
+        marginBottom: '10px',
     },
     priceitemSpan: {
         color: primary,
         fontSize: '1.3rem',
-        fontWeight: '800'
+        fontWeight: '800',
+        padding: '1rem',
     },
     priceTextSpan: {
    
         color: '#80808091 !important',
         height: '40px',
-        borderRadius: '10px',
+        borderRadius: '4px',
         border: "none",
         paddingLeft: '5px',
         paddingRight: '10px',
         background: "#fff",
         outline: "none",
+        width: '49%',
     },
     btnBage: {
+        padding:'1rem',
         '& Button': {
             color: '#211d70',
             minWidth: '79px !important',
@@ -393,15 +398,14 @@ const AddPostIndex = () => {
                         <TextareaAutosize onChange={(e) => setDescription(e.target.value)} className={classes.textereaItem} aria-label="minimum height" minRows={5} placeholder='توضیحات:' />
                     </Box>
 
-                    <Box component='span' display='flex' justifyContent='space-around' mb={.5}  className={classes.priceitemSpan}>
-
-                        <input  value={DisCount == 0 ? "اختیاری" : DisCount} onChange={(e) => handleSetDisPrice(e)} type="number" placeholder="تخفیف % (اختیاری)"  className={classes.priceTextSpan} />
+                    <Box  display='flex' justifyContent='space-between' mb={.5}  className={classes.priceitemSpan}>
                         <input value={Price == 0 ? "اختیاری" : Price} onChange={(e) => setPrice(e.target.value)} type="number" placeholder="قیمت(اختیاری)" className={classes.priceTextSpan} />
+                        <input  value={DisCount == 0 ? "اختیاری" : DisCount} onChange={(e) => handleSetDisPrice(e)} type="number" placeholder="تخفیف % (اختیاری)"  className={classes.priceTextSpan} />
                     </Box>
 
 
-                    <Box my={3} px={1.5} display='flex' width='100%' alignItems='center' justifyContent='space-around' className={classes.btnBage} >
-                        <Button onClick={() => setShowAddLables(true)} className={classes.ButtonCustom}>برچسب ها:</Button>
+                    <Box  px={1.5} display='flex' width='100%' alignItems='center' justifyContent='space-between' className={classes.btnBage} >
+                        <Button className={classes.ButtonCustom}>برچسب ها:</Button>
                         <Button onClick={() => setShowAddLables(true)} className={classes.ButtonCustom}><AddIcon /></Button>
                         {/* <Button onClick={() => setShowAddLables(true)} className={classes.ButtonCustom}><MoreHorizIcon /></Button> */}
                     </Box>

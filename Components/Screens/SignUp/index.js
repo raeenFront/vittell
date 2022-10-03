@@ -139,16 +139,19 @@ const SignUpIndex = () => {
 
             <Box display='flex' className={classes.textFiledItemBox} width='100%' flexDirection='column' justifyContent='center' alignItems='center'>
               <TextFieldItem
-                inputProps='شماره'
+                inputProps='شماره تماس : '
                 type="number"
                 onChange={(e) => setMobile(e.target.value)}
+                style={{marginTop:'10px'}}
+
               />
               <select
                 className={classes.selectItemTextFeild}
                 id="demo-simple-select-outlined22"
                 onChange={(e) => setProvinceId(e.target.value)}
+                style={{marginTop:'10px'}}
               >
-                <option>لطفا استان مورد نظر را انتخاب کنید</option>
+                <option> استان مورد نظر را انتخاب کنید</option>
                 {Province && Province?.map((item) => <option onClick={(e) => setProvinceId(e.target.value)} key={item?.id} value={item?.id}>{item?.name}</option>)}
               </select>
 
@@ -157,8 +160,10 @@ const SignUpIndex = () => {
                 id="demo-simple-select-outlined222"
                 onChange={(e) => setCityId(e.target.value)}
                 defaultValue="شیراز"
+                style={{marginTop:'10px'}}
+
               >
-                <option>لطفا برای نمایش شهر اول استان را انتخاب کنید</option>
+                <option>شهر مورد نظر خود را انتخاب کنید</option>
                 {City && City?.map((item) => <option key={item?.id} value={item?.id}>{item?.name}</option>)}
               </select>
 
@@ -166,6 +171,7 @@ const SignUpIndex = () => {
                 inputProps='رمز عبور'
                 onChange={(e) => setPassword(e.target.value)}
                 type={passwordShow ? 'text' : 'password'}
+                myClasses={classes.mt10}
                 icon={
                   <IconButton
                     aria-label="toggle password visibility">
@@ -180,6 +186,7 @@ const SignUpIndex = () => {
               <TextFieldItem
                 inputProps='تکرار رمز عبور'
                 onChange={(e) => setConfirmPassword(e.target.value)}
+                myClasses={classes.mt10}
                 type={tryPassword ? 'text' : 'password'}
                 icon={
                   <IconButton
@@ -198,7 +205,7 @@ const SignUpIndex = () => {
 
             <Box mt={5} width='100%' textAlign='center' className={classes.buttonSignUp}>
               <Button style={{ margin: "0px 10px" , backgroundColor:primary , color:"#fff"}} onClick={() => handleSubmit()} variant="contained" width='30%'>ثبت نام</Button>
-              <Button style={{ margin: "0px 10px" }} onClick={() => Router.push({ pathname: '/login' })} variant="contained" width='30%'>ورود</Button>
+              {/* <Button style={{ margin: "0px 10px" }} onClick={() => Router.push({ pathname: '/login' })} variant="contained" width='30%'>ورود</Button> */}
             </Box>
           </Container>
           {/* <a onClick={() => Router.push({ pathname: '/login' })} style={{ marginTop: -50 }} className={classes.forgetPasswordLink}>اکانت کاربری دارم !</a> */}

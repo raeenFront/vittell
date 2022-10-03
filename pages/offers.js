@@ -80,7 +80,7 @@ const NormalUserProfileIndex = () => {
         style={{ marginBottom: "40px" }}
       >
         <TitleBox
-          title='تخفیف ها'
+          title='تخفیفات امروز ویتل'
         />
       </Box>
 
@@ -100,7 +100,8 @@ const NormalUserProfileIndex = () => {
                       key={item?.id}
                       href={`posts/${item?.id}`}
                       homePic={BASE_Image_Url + item?.image}
-                      description={item?.title}
+                      title={item?.title}
+                      description={item?.description}
                     />
                   ))}
               </>
@@ -137,7 +138,8 @@ const NormalUserProfileIndex = () => {
                       key={item?.id}
                       href={`posts/${item?.id}`}
                       homePic={BASE_Image_Url + item?.image}
-                      description={item?.title}
+                      title={item?.title}
+                      description={item?.description}
                     />
                   ))}
               </>

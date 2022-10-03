@@ -115,8 +115,9 @@ const useStyles = makeStyles({
         margin: "30px 20px 10px",
         paddingTop: "20px",
         width: "100%",
-        background: 'linear-gradient(to  bottom, #EDECE7, #fff)',
-        borderTop: '2px solid #aaa' 
+        // background: 'linear-gradient(to  bottom, #EDECE7, #fff)',
+        background:'transparent',
+        // borderTop: '2px solid #aaa' 
 
 
     },
@@ -134,8 +135,16 @@ const useStyles = makeStyles({
         }
     },
     editBtnItem: {
-        width: '40%'
-    }
+        width: '40%',
+        
+    },
+    price_list_btn:{
+        borderRadius: '10px',
+        backgroundColor: primary,
+        color:'#fff',
+        width:'25%',
+        padding: '10px',
+    },
 });
 
 const Profile = () => {
@@ -160,6 +169,7 @@ const Profile = () => {
     const [Wallpaer, setWallpaer] = useState("../images/Placeholder.PNG");
     const [Profile, setProfile] = useState("../images/Placeholder.PNG");
     const [BusinessName, setBusinessName] = useState("");
+    const [Description, setDescription] = useState("");
     const [Biography, setBiography] = useState("");
 
     const [UserID, setUserID] = useState(null);
@@ -188,6 +198,7 @@ const Profile = () => {
                     setBusinessName(data?.businessName);
                     setBiography(data?.biography);
                     setUserProfile(data);
+                    setDescription(data?.description);
                     setWallpaer(data?.wallpaper);
                     setProfile(data?.profileImage);
                     setTell(data?.tell);
@@ -213,7 +224,8 @@ const Profile = () => {
             </Box>
 
             <Box component='span' fontWeight='bold' display='flex' justifyContent='center' className={classes.titleOfProfilePost} mr={3} mt={-3}>{BusinessName}</Box>
-
+            <Box component='span'  display='flex' justifyContent='center' className={classes.titleOfProfilePost} mr={3} style={{fontSize:'13px',color:'#888'}} >{Description}</Box>
+            <Box mb={-2} mt={4} style={{textAlign: 'center' ,borderBottom: '2px solid #aaa' }}></Box>
             <TextareaAutosize
                 value={Biography}
                 disabled
@@ -226,14 +238,22 @@ const Profile = () => {
                         onClick={() => router.push(`tel:+98${Tell}`)}
                     >
                         <SocialMediaIcon
-                            Icon={<PhoneIcon />}
+                            Icon={<ChatOutlinedIcon />}
                         />
                     </Button>
                     <Button
                         onClick={() => router.push(`tel:+98${Tell}`)}
                     >
                         <SocialMediaIcon
-                            Icon={<ChatOutlinedIcon />}
+                            Icon={<PhoneIcon />}
+                        />
+                    </Button>
+                    
+                    <Button
+                        onClick={() => router.push(`https://api.whatsapp.com/send?phone=+98${WhatsApp}`)}
+                    >
+                        <SocialMediaIcon
+                            Icon={<WhatsAppIcon />}
                         />
                     </Button>
                     <Button
@@ -244,23 +264,16 @@ const Profile = () => {
                         />
 
                     </Button>
-                    <Button
-                        onClick={() => router.push(`https://api.whatsapp.com/send?phone=+98${WhatsApp}`)}
-                    >
-                        <SocialMediaIcon
-                            Icon={<WhatsAppIcon />}
-                        />
-                    </Button>
+                <Button  className={classes.price_list_btn} onClick={() => { Router.push("/priceList/"+UserID), setState(false) }}>لیست قیمت</Button>
                 </Box>
                 <Box mb={3} pb={2} style={{textAlign: 'center' ,borderBottom: '2px solid #aaa' }}>
-                <Btn  variant="contained" onClick={() => { Router.push("../priceList"), setState(false) }}>لیست قیمت</Btn>
 
                 </Box>
 
 
 
                 <Grid style={{ display: " inline-flex" }}>
-                    <Box style={{ width: "100%" }} flexWrap='wrap' mb={10}>
+                    <Box style={{ width: "50%" }} flexWrap='wrap' mb={10}>
                         {
                             LoadingPost ? (
                                 " "
@@ -272,14 +285,15 @@ const Profile = () => {
                                                 key={item?.id}
                                                 href={`../posts/${item?.id}`}
                                                 homePic={BASE_Image_Url + item?.image}
-                                                description={item?.title}
+                                                title={item?.title}
+                                                description={item?.description}
                                             />
                                         ))}
                                 </>
                             )
                         }
                     </Box>
-                    <Box style={{ width: "100%" }} flexWrap='wrap' mb={10}>
+                    <Box style={{ width: "50%" }} flexWrap='wrap' mb={10}>
                         {
 
                             Posts?.length === 0 ? (
@@ -301,7 +315,8 @@ const Profile = () => {
                                                 key={item?.id}
                                                 href={`../posts/${item?.id}`}
                                                 homePic={BASE_Image_Url + item?.image}
-                                                description={item?.title}
+                                                title={item?.title}
+                                                description={item?.description}
                                             />
                                         ))}
                                 </>

@@ -10,12 +10,14 @@ import BlogBox from '../../Common/BlogBox';
 import SocialMediaIcon from '../../Common/SocialMediaIcon';
 import Btn from '../../Common/Button';
 import Loadings from '../../Common/Loading';
+import SentToPage from '../../../pages/sendToHome';
 
 // mrx : loading
 import PostLoading from '../../Common/Loading/PostLoading';
 
 // material ui
 import AddCircleIcon from '@material-ui/icons/AddCircle';
+import BackIcon from '@material-ui/icons/ArrowBackIos';
 import PhoneIcon from '@material-ui/icons/Phone';
 import ChatOutlinedIcon from '@material-ui/icons/ChatOutlined';
 import { makeStyles } from '@material-ui/core/styles';
@@ -64,9 +66,31 @@ const useStyles = makeStyles({
         right: "1px",
         top: "-7px",
     },
+    inputIcon: {
+        position: "absolute",
+        right: "0%",
+        top: "25%",
+        marginRight: "3%",
+    },
+    inputIconBox: {
+        position: "relative",
+        width: "100%",
+    },
+    profile_post_select: {
+        width: "50%",
+        padding: "8px",
+        borderRadius: '0.5rem',
+    },
+    profile_post_selected: {
+        backgroundColor: "#ef4b4c",
+        '& span': {
+            color: '#fff',
+        },
+    },
     containerSelect: {
         maxWidth: "50rem",
-        backgroundColor: "#fafafa",
+        backgroundColor: "#EDECE7",
+        // backgroundColor: "#fafafa",
         position: "absolute",
         width: "90%",
         borderRadius: "20px",
@@ -74,13 +98,16 @@ const useStyles = makeStyles({
         overflow: "scroll",
     },
     ButtonSend: {
-        background: "#eaeaea",
-        width: "100%",
+        backgroundColor: "#ef4b4c",
+        // background: "#eaeaea",
+        // width: "100%",
         fontSize: "15px !important",
-        color: "#585591",
+        // color: "#585591",
+        color: "#fff",
         borderRadius: "20px",
         border: "solid 1px #b7b2b2",
-        marginTop: 50
+        marginTop: 50,
+        padding: "5px 20px",
     },
     backgroundPicSlider: {
         '& img': {
@@ -91,13 +118,17 @@ const useStyles = makeStyles({
     Input: {
         width: "100%",
         border: ' none',
-        background: '#e6e6e6d6',
+        background: '#fff',
+        // background: '#e6e6e6d6',
         height: ' 42px',
         marginBottom: ' 15px',
-        borderRadius: ' 20px',
+        borderRadius: ' 7px',
         padding: ' 20px',
         outline: ' none',
         color: '#2f2e2e',
+    },
+    text_align_left: {
+        textAlign: 'left',
     },
     avatorImageBox: {
         marginTop: '-4rem',
@@ -134,16 +165,15 @@ const useStyles = makeStyles({
         width: "100%",
     },
     alertBoxItem: {
-        backgroundColor: secondary,
+        backgroundColor: "#B8B8B8",
         borderRadius: '1rem',
+        color: '#fff',
         '& svg': {
             color: '#ffffffb8'
         },
         '& span': {
             fontSize: '1.2rem',
-            color: '#ffffffb8',
             fontWeight: 'bold'
-
         }
     },
     editBtnItem: {
@@ -151,13 +181,13 @@ const useStyles = makeStyles({
         margin: "0px 10px",
     }
     ,
-   sendTosearchText:{
-    width: '40%',
-    margin: "0px 10px",
-    fontSize: 12,
-    color: secondary,
-    fontWeight: 'bold'
-   }
+    sendTosearchText: {
+        width: '40%',
+        margin: "0px 10px",
+        fontSize: 12,
+        color: secondary,
+        fontWeight: 'bold'
+    }
 });
 
 const BusinessAccountBusinessOwner = () => {
@@ -175,11 +205,15 @@ const BusinessAccountBusinessOwner = () => {
     const [Instagram, setInstagram] = useState(null);
     const [Telegram, setTelegram] = useState(null);
 
-    // mrx : modal states 
+    // mrx : modal states
     const [ShowModalTell, setShowModalTell] = useState(false);
     const [SavePosts, setSavePosts] = useState([]);
     const [Posts, setPosts] = useState([]);
     const [LoadingPost, setLoadingPost] = useState(true);
+
+    //modal send to page
+    const [showSendToPage, setShowSendToPage] = useState(false);
+    const [sentToPageType, setSentToPageType] = useState(1);
 
     // mrx : ShowModalTell of pictures
     const [Wallpaer, setWallpaer] = useState("../images/Placeholder.PNG");
@@ -189,6 +223,7 @@ const BusinessAccountBusinessOwner = () => {
     const [ButtonTypeW, setButtonTypeW] = useState(true);
     const [ButtonTypeP, setButtonTypeP] = useState(true);
     const [BusinessName, setBusinessName] = useState("");
+    const [Description, setDescription] = useState("");
     const [Biography, setBiography] = useState("");
     const [PostCount, setPostCount] = useState(0);
     const [SavesCount, setSavesCountCount] = useState(0);
@@ -298,6 +333,7 @@ const BusinessAccountBusinessOwner = () => {
                     setBiography(data?.biography);
                     setUserProfile(data);
                     setWallpaer(data?.wallpaper);
+                    setDescription(data?.description);
                     setProfile(data?.profileImage);
                     setTell(data?.tell);
                     setWhatsApp(data?.whatsApp);
@@ -330,6 +366,7 @@ const BusinessAccountBusinessOwner = () => {
             telegram: Telegram,
             tell: Tell,
             WebSite: Instagram,
+            description: Description,
             whatsApp: WhatsApp,
             cityId: UserInfo?.cityId,
             categoryId: UserInfo?.categoryId,
@@ -402,15 +439,17 @@ const BusinessAccountBusinessOwner = () => {
                         </Box>
 
                         <Box component='span' fontWeight='bold' display='flex' justifyContent='center' className={classes.titleOfProfilePost} mr={3} mt={-3}>{BusinessName}</Box>
-
+                        <Box component='span' display='flex' justifyContent='center' className={classes.titleOfProfilePost} mr={3} style={{ color: '#888', fontSize: '13px' }} >{Description}</Box>
+                        <Box pb={2} mb={2} display='flex' width='100%' alignItems='center' justifyContent='center' style={{ borderBottom: '2px solid #bbb' }}></Box>
                         <TextareaAutosize
                             value={Biography}
                             disabled
                             className="paragraphPost2"
+                            style={{ marginBottom: '30px' }}
                         />
 
                         <Container maxWidth='sm'>
-                            <Box mb={2} pb={2} display='flex' width='100%' alignItems='center' justifyContent='center' style={{borderBottom:'2px solid #bbb'}}>
+                            <Box mb={2} pb={2} display='flex' width='100%' alignItems='center' justifyContent='center' style={{ borderBottom: '2px solid #bbb' }}>
                                 <Button
                                     onClick={() => router.push(`tel:+98${Tell}`)}
                                 >
@@ -444,34 +483,40 @@ const BusinessAccountBusinessOwner = () => {
 
                             <Box mb={3} mt={2} display='flex' width='100%' alignItems='center' justifyContent='center'>
                                 <Btn onClick={() => setShowModalTell(true)} variant='contained' className={classes.editBtnItem}>ویرایش حساب</Btn>
-                                <Btn variant='contained' className={classes.editBtnItem}> لیست قیمت </Btn>
+                                <Btn variant='contained' className={classes.editBtnItem} onClick={() => router.push('/priceList/' + Cookies.get("USID"))}> لیست قیمت </Btn>
                             </Box>
 
-                            <Box pb={2} mb={2} display='flex' width='100%' alignItems='center' justifyContent='center' style={{borderBottom:'2px solid #bbb'}}>
-                            <Typography  className={classes.sendTosearchText} fontSize=""  >
-                                درصورت تمایل برای دیده شدن صفحه فروشگاهتان، در ابتدای صفحه جستجو فروشگاها، می توانید از این بخش وارد شوید
-                            </Typography>
+                            <Box pb={2} mb={2} display='flex' width='100%' alignItems='center' justifyContent='center' style={{ borderBottom: '2px solid #bbb' }}>
+                                <Typography className={classes.sendTosearchText} fontSize=""  >
+                                    درصورت تمایل برای دیده شدن صفحه فروشگاهتان، در ابتدای صفحه جستجو فروشگاها، می توانید از این بخش وارد شوید
+                                </Typography>
 
-                                <Btn className={classes.editBtnItem} onClick={() => handleSendToSearch()} variant='contained'>انتقال به جستجو</Btn>
+                                <Btn className={classes.editBtnItem} onClick={() =>/* handleSendToSearch()*/ { setSentToPageType(2); setShowSendToPage(true) }} variant='contained'>انتقال به جستجو</Btn>
                             </Box>
 
-                            <Box   component='span' fontWeight='bold' display='flex' className={classes.titleOfProfile}>تعدادبازدید :
+                            <Box component='span' fontWeight='bold' display='flex' className={classes.titleOfProfile}>تعدادبازدید :
                                 <Box component='span' fontWeight='bold' display='flex' className={classes.titleOfProfile} >{UserProfile?.totalVisit}</Box>
                             </Box>
 
-                            <Box p={1} my={4} width='100%' display='flex' justifyContent='space-around' className={classes.alertBoxItem}>
-                                <Box display='flex' flexDirection='column' alignItems='center' justifyContent='center'>
-                                    <Button onClick={() => handleChangeUserPost(2)}>
-                                        <img src='/images/penIcon.png' width='30px' style={{ paddingLeft: 10 }} />
-                                        <Box component='span' mt={.5}>نشان شده ها <spna className={classes.PostsCountSt}>{SavesCount}</spna></Box>
-                                    </Button>
-                                </Box>
-                                <Box display='flex' flexDirection='column' alignItems='center' justifyContent='center'>
+                            <Box my={4} width='100%' display='flex' justifyContent='space-around' className={classes.alertBoxItem}>
+                                <Box className={`${classes.profile_post_select} ${UserPost === 1 ? classes.profile_post_selected : ''}`} display='flex' flexDirection='column' alignItems='center' justifyContent='center'>
                                     <Button onClick={() => handleChangeUserPost(1)}>
-                                        <img src='/images/postIcon.png' width='30px' style={{ paddingLeft: 10 }} />
-                                        <Box component='span' mt={.5}>آگهی های من <spna className={classes.PostsCountSt}>{PostCount}</spna></Box>
+                                        {/* <img src='/images/postIcon.png' width='30px' style={{ paddingLeft: 10 }} />
+                                        <Box component='span' mt={.5}>آگهی های من <spna className={classes.PostsCountSt}>{PostCount}</spna></Box> */}
+                                        <span>آگهی های من</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <span>{SavesCount} پست</span>
                                     </Button>
                                 </Box>
+                                <Box className={`${classes.profile_post_select} ${UserPost === 2 ? classes.profile_post_selected : ''}`} display='flex' flexDirection='column' alignItems='center' justifyContent='center'>
+                                    <Button onClick={() => handleChangeUserPost(2)}>
+                                        {/* <img src='/images/penIcon.png' width='30px' style={{ paddingLeft: 10 }} />
+                                        <Box component='span' mt={.5}>نشان شده ها <spna className={classes.PostsCountSt}>{SavesCount} پست</spna></Box> */}
+                                        <span>نشان شده ها</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <span>{SavesCount} پست</span>
+                                    </Button>
+
+                                </Box>
+
                             </Box>
 
 
@@ -493,7 +538,8 @@ const BusinessAccountBusinessOwner = () => {
                                                                         key={item?.id}
                                                                         href={`posts/${item?.postId}`}
                                                                         homePic={BASE_Image_Url + item?.postImage}
-                                                                        description={item?.postTitle}
+                                                                        title={item?.postTitle}
+                                                                        description={item?.postDescription}
                                                                     />
                                                                 ))}
                                                         </>
@@ -522,7 +568,8 @@ const BusinessAccountBusinessOwner = () => {
                                                                         key={item?.id}
                                                                         href={`posts/${item?.postId}`}
                                                                         homePic={BASE_Image_Url + item?.postImage}
-                                                                        description={item?.postTitle}
+                                                                        title={item?.postTitle}
+                                                                        description={item?.postDescription}
                                                                     />
                                                                 ))}
                                                         </>
@@ -558,7 +605,8 @@ const BusinessAccountBusinessOwner = () => {
                                                                         key={item?.id}
                                                                         href={`posts/${item?.id}`}
                                                                         homePic={BASE_Image_Url + item?.image}
-                                                                        description={item?.title}
+                                                                        title={item?.title}
+                                                                        description={item?.description}
                                                                     />
                                                                 ))}
                                                         </>
@@ -577,7 +625,8 @@ const BusinessAccountBusinessOwner = () => {
                                                                         key={item?.id}
                                                                         href={`posts/${item?.id}`}
                                                                         homePic={BASE_Image_Url + item?.image}
-                                                                        description={item?.title}
+                                                                        title={item?.title}
+                                                                        description={item?.description}
                                                                     />
                                                                 ))}
                                                         </>
@@ -600,6 +649,7 @@ const BusinessAccountBusinessOwner = () => {
                 onClose={() => setShowModalTell(false)}
                 style={{
                     height: "100vh",
+                    width: "100%",
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
@@ -607,11 +657,22 @@ const BusinessAccountBusinessOwner = () => {
                 }}
             >
                 <Slide direction="up" in={ShowModalTell} mountOnEnter unmountOnExit>
-                    <Grid className={classes.containerSelect} container justify="center">
+                    <Grid className={classes.containerSelect} style={{ width: '100%', height: '100vh', borderRadius: '0px' }} container justify="center">
+                        <div style={{width:'100%', textAlign:'left',marginBottom:'20px'}}>
+                            <BackIcon style={{fontSize:'2.5rem'}} onClick={()=>setShowModalTell(false)} />
+                        </div>
+
                         <input
                             placeholder="نام کسب و کار"
                             value={BusinessName}
                             onChange={(e) => setBusinessName(e.target.value)}
+                            className={classes.Input}
+                            type="text"
+                        />
+                        <input
+                            placeholder="توضیحات"
+                            value={Description}
+                            onChange={(e) => setDescription(e.target.value)}
                             className={classes.Input}
                             type="text"
                         />
@@ -622,21 +683,40 @@ const BusinessAccountBusinessOwner = () => {
                             aria-label="minimum height"
                             minRows={5}
                             value={Biography}
+
                         />
-                        <input
-                            placeholder="شماره واتس اپ"
-                            value={WhatsApp}
-                            onChange={(e) => setWhatsApp(e.target.value)}
-                            className={classes.Input}
-                            type="number"
-                        />
-                        <input
-                            placeholder="آیدی اینستاگرام"
-                            value={Instagram}
-                            onChange={(e) => setInstagram(e.target.value)}
-                            className={classes.Input}
-                            type="text"
-                        />
+                        <div style={{ borderBottom: '2px solid #bbb', padding: '1px', width: '100%', marginBottom: '20px' }}></div>
+                        <div className={classes.inputIconBox}>
+                            <input
+                                placeholder="شماره تماس"
+                                value={Tell}
+                                onChange={(e) => setTell(e.target.value)}
+                                className={`${classes.Input} ${classes.text_align_left}`}
+                                type="number"
+                            />
+                            <PhoneIcon className={classes.inputIcon} style={{ color: '#FF5500' }} />
+                        </div>
+                        <div className={classes.inputIconBox}>
+                            <input
+                                placeholder="آیدی اینستاگرام"
+                                value={Instagram}
+                                onChange={(e) => setInstagram(e.target.value)}
+                                className={`${classes.Input} ${classes.text_align_left}`}
+                                type="text"
+                            />
+                            <InstagramIcon className={classes.inputIcon} style={{ color: '#CE174F' }} />
+                        </div>
+                        <div className={classes.inputIconBox}>
+                            <input
+                                placeholder="شماره واتس اپ"
+                                value={WhatsApp}
+                                onChange={(e) => setWhatsApp(e.target.value)}
+                                className={`${classes.Input} ${classes.text_align_left}`}
+                                type="number"
+                            />
+                            <WhatsAppIcon className={classes.inputIcon} style={{ color: '#019235' }} />
+                        </div>
+
                         {/* <input
                             placeholder="آیدی تلگرام"
                             value={Telegram}
@@ -644,23 +724,22 @@ const BusinessAccountBusinessOwner = () => {
                             className={classes.Input}
                             type="text"
                         /> */}
-                        <input
-                            placeholder="شماره تماس"
-                            value={Tell}
-                            onChange={(e) => setTell(e.target.value)}
-                            className={classes.Input}
-                            type="number"
-                        />
+
 
                         <Button
                             onClick={() => handleChangeUserDetail()}
                             className={classes.ButtonSend}
                         >
-                            ویرایش اطلاعات
+                            انجام شد
                         </Button>
                     </Grid>
                 </Slide>
             </Modal>
+            {
+                showSendToPage ?
+                    <SentToPage handleModal={setShowSendToPage} type={sentToPageType} handleOk={handleSendToSearch} />
+                    : <></>
+            }
         </>
 
     );

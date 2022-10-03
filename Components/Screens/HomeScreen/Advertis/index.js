@@ -76,7 +76,7 @@ const AdvertisIndex = () => {
             }}
             maxWidth='sm'
         >
-            <Grid style={{ display: " inline-flex", marginTop: "20px" }}>
+            <Grid style={{ display: " inline-flex", marginTop: "20px",width:'100%' }}>
                 <Box style={{ width: "50%" }} flexWrap='wrap' mb={10}>
                     {
                         <>
@@ -88,7 +88,8 @@ const AdvertisIndex = () => {
                                         key={item?.id}
                                         href={`/posts/${item.id}`}
                                         homePic={BASE_Image_Url + item.image}
-                                        description={item.title}
+                                        title={item.title}
+                                        description={item.description}
                                     />
                                 ))
                             }
@@ -106,7 +107,8 @@ const AdvertisIndex = () => {
                                         key={item?.id}
                                         href={`/posts/${item.id}`}
                                         homePic={BASE_Image_Url + item.image}
-                                        description={item.title}
+                                        title={item.title}
+                                        description={item.description}
                                     />
                                 ))
                             }

@@ -9,7 +9,7 @@ const secondary = theme.palette.secondary.main;
 const white = theme.palette.common.white;
 const colorDescription = theme.palette.initial.main
 
-const BlogBox = ({ off, from, id, homePic, description, href, Offer }) => {
+const BlogBox = ({ off, from, id, homePic, description, href, Offer, title }) => {
   const classes = useStyles();
 
   return (
@@ -45,7 +45,10 @@ const BlogBox = ({ off, from, id, homePic, description, href, Offer }) => {
             />
           </Box>
           <Box component="span" textAlign="right" width="100%" mr={2}>
-            {description}
+            {title}<br/>
+            <span style={{fontSize:'11px',color:'#acacac',marginRight:'1px'}}>
+              {description?.split(' ')?.map((item, index) => index < 2 ? item : '') }...
+            </span>
           </Box>
         </Box>
       </Link>
@@ -54,6 +57,15 @@ const BlogBox = ({ off, from, id, homePic, description, href, Offer }) => {
 };
 
 const useStyles = makeStyles({
+  postDescription: {
+    color: '#acacac',
+    fontSize: '11px',
+    textAlign: 'right',
+  },
+  postDecriptionParent: {
+    width: '65%',
+    textAlign: 'right',
+  },
   sliderItemBox: {
     "& img": {
       objectFit: "cover"
@@ -85,7 +97,8 @@ const useStyles = makeStyles({
     padding: "7px",
     borderRadius: "10px",
     left: "5px"
-  }
+  },
+
 });
 
 export default BlogBox;

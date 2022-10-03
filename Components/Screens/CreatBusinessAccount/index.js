@@ -79,6 +79,7 @@ const CreatBusinessAccountIndex = () => {
     const [ShowUserDetail, setShowUserDetail] = useState(false);
     const [PicDt, setPicDt] = useState([]);
     const [PicDtP, setPicDtP] = useState([]);
+    const [Description, setDescription] = useState('');
 
     // mrx : modal states 
     const [ShowModalTell, setShowModalTell] = useState(false);
@@ -167,10 +168,11 @@ const CreatBusinessAccountIndex = () => {
         });
     }
 
-    const HandleCreatBusinessAccountIndex = () => {
+    const HandleCreatBusinessAccountIndex = (from = 0) => {
         PostAuthUrl(MEMBER_TO_BUSSINES, {
             BusinessName: BusinessName,
             CityId: CityId,
+            description: Description,
             biography: Biography,
             CategoryId: category?.id,
             Instagram: Instagram,
@@ -185,7 +187,12 @@ const CreatBusinessAccountIndex = () => {
                     HandleUploadWallpaper();
                     Cookies.set("Count", 1);
                     toast.success(res?.data?.message);
-                    Router.push("/myprofile");
+                    //from the send button
+                    if (from === 0)
+                        Router.push("/myprofile");
+                    //from the price list button
+                    else
+                    router.push('/priceList/'+Cookies.get("USID"));
                 } else {
                     toast.error(res?.data?.message);
                 }
@@ -296,11 +303,11 @@ const CreatBusinessAccountIndex = () => {
                         backgroundColor='#FFF'
                         onChange={(e) => setBusinessName(e.target.value)}
                     />
-                    {/* <TextFieldItem
-                        inputProps='بیوگرافی'
-                        backgroundColor='#d1d3d487'
-                        onChange={(e) => setBiography(e.target.value)}
-                    /> */}
+                    <TextFieldItem
+                        inputProps='توضیحات'
+                        backgroundColor='#fff'
+                        onChange={(e) => setDescription(e.target.value)}
+                    />
                     <TextareaAutosize
                         placeholder="بیوگرافی"
                         onChange={(e) => setBiography(e.target.value)}
@@ -347,7 +354,7 @@ const CreatBusinessAccountIndex = () => {
                     >
                         <SetSocialMediaIcon
                             Icon={<PhoneIcon />}
-                            backgroundColor = "#b4b4b4"
+                            backgroundColor="#b4b4b4"
 
                         />
                     </Button>
@@ -356,7 +363,7 @@ const CreatBusinessAccountIndex = () => {
                     >
                         <SetSocialMediaIcon
                             Icon={<ChatOutlinedIcon />}
-                            backgroundColor = "#b4b4b4"
+                            backgroundColor="#b4b4b4"
 
                         />
                     </Button>
@@ -365,20 +372,20 @@ const CreatBusinessAccountIndex = () => {
                     >
                         <SetSocialMediaIcon
                             Icon={<InstagramIcon />}
-                            backgroundColor = "#b4b4b4"
-                             />
+                            backgroundColor="#b4b4b4"
+                        />
                     </Button>
                     <Button
                         onClick={() => setShowModalTell(true)}
                     >
                         <SetSocialMediaIcon
                             Icon={<WhatsAppIcon />}
-                            backgroundColor = "#b4b4b4"
+                            backgroundColor="#b4b4b4"
 
                         />
                     </Button>
 
-                    <Btn  style={{backgroundColor:'#b4b4b4'}} >لیست قیمت</Btn>
+                    <Btn style={{ backgroundColor: '#b4b4b4' }} onClick={() => HandleCreatBusinessAccountIndex(1)} >لیست قیمت</Btn>
                 </Box>
 
 

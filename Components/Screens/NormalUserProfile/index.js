@@ -184,7 +184,8 @@ const NormalUserProfileIndex = () => {
                       key={item?.id}
                       href={`posts/${item?.postId}`}
                       homePic={BASE_Image_Url + item?.postImage}
-                      description={item?.postTitle}
+                      title={item?.postTitle}
+                      description={item?.postDescription}
                     />
                   ))}
               </>
@@ -219,7 +220,8 @@ const NormalUserProfileIndex = () => {
                       key={item?.id}
                       href={`posts/${item?.postId}`}
                       homePic={BASE_Image_Url + item?.postImage}
-                      description={item?.postTitle}
+                      title={item?.postTitle}
+                      description={item?.postDescription}
                     />
                   ))}
               </>

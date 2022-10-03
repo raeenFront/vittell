@@ -1,0 +1,14 @@
+
+.avatorImageBox: {
+    marginTop: '-4rem',
+    '& .MuiAvatar-root': {
+        width: theme.spacing(9),
+        height: theme.spacing(9),
+        border: '3px solid #fff',
+    },
+    '& svg': {
+        color: secondary,
+        fontSize: '2rem',
+        marginBottom: '2rem'
+    },
+},

@@ -27,6 +27,7 @@ import {
 
 // mrx : api
 import { PostUrl, GetUrl } from "../../../../pages/api/config";
+import { red } from "@material-ui/core/colors";
 
 // mrx : colors
 const primary = theme.palette.primary.main;
@@ -81,54 +82,57 @@ const DiscountSlider = () => {
           {LoadingDisCount
             ? " "
             : offerSlider &&
-              offerSlider.reverse()?.map((item) => (
-                <div key={item?.id}>
-                  <Link href={`/posts/${item?.id}`}>
-                    <Box>
-                      {item.percentage !== 0 ? (
-                        <Box
-                          position="relative"
-                          mx="auto"
-                          textAlign="center"
-                          className={classes.bageSliderBox}
-                        >
-                          <img
-                            // src="/images/bageItemPic.png"
-                            className={classes.badgeSliderBoxPic}
-                            style={{backgroundColor:primary , borderRadius:'50px'}}
-                          />
-                          <Box
-                            color="#fff"
-                            width="100%"
-                            top="-1rem"
-                            left="5.3rem"
-                            position="absolute"
-                            className={classes.badgeSliderSpanText}
-                          >
-                            <Typography variant="h5">
-                              %{item.percentage}
-                            </Typography>
-                          </Box>
-                        </Box>
-                      ) : (
-                        ""
-                      )}
+            offerSlider.reverse()?.map((item) => (
+              <div key={item?.id}>
+                <Link href={`/posts/${item?.id}`}>
+                  <Box position="relative">
+                    {item.percentage !== 0 ? (
                       <Box
-                        className={classes.sliderItemBox}
-                        // position="relative"
-                        style={{ overflow: "hidden" }}
+                        
+                        mx="auto"
+                        textAlign="center"
+                        className={classes.bageSliderBox}
                       >
-                        <img src={BASE_Image_Url + item?.image} />
-                        <LinesEllipsis
-                          style={{ paddingRight: "10px" }}
-                          className={classes.sliderOff}
-                          text={`${item?.title} ...`}
+                        <div className={classes.badge_red}>
+                          <span className={classes.badge_percentage}>%{item.percentage}</span>
+                        </div>
+                        {/* <img
+                          // src="/images/bageItemPic.png"
+                          className={classes.badgeSliderBoxPic}
+                          style={{ backgroundColor: primary, borderRadius: '50px' }}
                         />
+                        <Box
+                          color="#fff"
+                          width="100%"
+                          top="-1rem"
+                          right="-3rem"
+                          position="absolute"
+                          className={classes.badgeSliderSpanText}
+                        >
+                          <Typography variant="h5">
+                            %{item.percentage}
+                          </Typography>
+                        </Box> */}
                       </Box>
+                    ) : (
+                      ""
+                    )}
+                    <Box
+                      className={classes.sliderItemBox}
+                      // position="relative"
+                      style={{ overflow: "hidden" }}
+                    >
+                      <img src={BASE_Image_Url + item?.image} />
+                      <LinesEllipsis
+                        style={{ paddingRight: "10px" }}
+                        className={classes.sliderOff}
+                        text={`${item?.title} ...`}
+                      />
                     </Box>
-                  </Link>
-                </div>
-              ))}
+                  </Box>
+                </Link>
+              </div>
+            ))}
         </Slider>
       </Box>
     </>
@@ -136,6 +140,21 @@ const DiscountSlider = () => {
 };
 
 const useStyles = makeStyles({
+  badge_red:{
+    backgroundColor:primary,
+    borderRadius:'50%',
+    width:'3.5rem',
+    height:'3.5rem',
+    position:'absolute',
+    right:'2px',
+    bottom:'15%'
+  },
+  badge_percentage:{
+    color:'#fff',
+    fontSize:'13px',
+    position:'relative',
+    top:'1rem',
+  },
   badgeSliderBoxPic: {
     display: "inline!important",
     transform: "translateY(3rem)!important",
@@ -205,7 +224,7 @@ const useStyles = makeStyles({
       [theme.breakpoints.down("sm")]: {
         lineHeight: "1rem !important",
         marginTop: "8rem",
-        
+
       }
     }
   }

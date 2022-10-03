@@ -45,6 +45,7 @@ import {
 } from '@material-ui/core';
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import clsx from 'clsx';
 import Drawer from '@material-ui/core/Drawer';
 import { makeStyles } from '@material-ui/core/styles';
@@ -55,6 +56,12 @@ import BookmarkBorderIcon from '@material-ui/icons/BookmarkBorder';
 import Bookmark from '@material-ui/icons/Bookmark';
 import WhatsAppIcon from '@material-ui/icons/WhatsApp';
 import InstagramIcon from '@material-ui/icons/Instagram';
+import EditIcon from '@material-ui/icons/Edit';
+//  import PasswordIcon from '@material-ui/icons/Key';
+// import SharedIcon from '@material-ui/icons/Polyline';
+import InfoIcon from '@material-ui/icons/Info';
+import ContactIcon from '@material-ui/icons/CallEnd';
+import SignoutIcon from '@material-ui/icons/Input';
 
 // mrx : styles
 import { theme } from '../theme';
@@ -82,11 +89,20 @@ const useStyles = makeStyles({
     mycityText: {
         fontSize: "13px",
         color: "#525252",
-        fontWeight: "bold"
+        fontWeight: "bold",
+        margin: '0px',
+    },
+    myCityUnderIcon: {
+        margin: '0px',
+        padding: '0px',
+        width: '30px',
+        height: '30px',
     },
     mycityButton: {
         position: "absolute",
-        right: "60px",
+        right: "30px",
+        top: '-2px',
+        alignItems: "flex-start",
     },
     header: {
         position: 'fixed',
@@ -170,6 +186,11 @@ const useStyles = makeStyles({
             fontSize: '1.3rem',
 
         }
+    },
+    menuIcon:{
+        fontSize:'2rem',
+        verticalAlign:'middle',
+        marginLeft: '5px',
     },
     formControlHeader: {
         marginBottom: '1rem !important',
@@ -408,13 +429,16 @@ const Header = ({ test }) => {
         setCityIdH(e.target.value);
         Cookies.set("ISFIRST", e.target.value);
         Cookies.set("ISDefult", false);
+        Cookies.set("CITN", JSON.stringify(City?.filter((item) => item?.id === Cookies.get('ISFIRST'))[0]?.name) ?? "شهر من");
         setTimeout(function () {
             router.reload();
         }, 2000);
     }
 
     const ShowCity = () => {
-        if (Cookies.get("CITN")?.length > 3) {
+        return Cookies.get("CITN");
+        return City?.filter((item) => item?.id === Cookies.get('ISFIRST'))[0]?.name ?? "شهر من";
+        if (Cookies.get("CITN")?.length > 1) {
             return Cookies.get("CITN");
             setCityValue(Cookies.get("CITN"));
         } else {
@@ -436,7 +460,8 @@ const Header = ({ test }) => {
                 {
                     !Cookies.get("tm3fn4t867oehg4863ftbkijuhy34gvfeiu736t4n") ? (
                         <Button className={classes.BTNMenu} onClick={() => HandleLogin()}>
-                            <Box component='li'>ورود به حساب کاربری</Box>
+                            <Box component='li'>ورود به حساب کاربری
+                            </Box>
                         </Button>
 
                     ) : (
@@ -446,7 +471,8 @@ const Header = ({ test }) => {
                                     <>
                                         <Grid style={{
                                             boxShadow: "-2px 16px 20px -4px #00000026",
-                                            background: "linear-gradient( to right, #928aff 0%, #8a5fcff5 51%, #392cff 100% )",
+                                            // background: "linear-gradient( to right, #928aff 0%, #8a5fcff5 51%, #392cff 100% )",
+                                            background: "rgb(239 75 76)",
                                             marginTop: "-10px",
                                             paddingTop: "10px",
                                             color: "white",
@@ -462,21 +488,36 @@ const Header = ({ test }) => {
                         </>
                     )
                 }
-
                 <Button className={classes.BTNMenu} onClick={() => { Router.push("/ResetPassword"), setState(false) }}>
-                    <Box component='li'>تغییر رمز عبور</Box>
+                    <Box component='li'>
+                        <EditIcon className={classes.menuIcon} />
+                        <span>ویرایش حساب کاربری</span>
+                    </Box>
+                </Button>
+                <Button className={classes.BTNMenu} onClick={() => { Router.push("/ResetPassword"), setState(false) }}>
+                    <Box component='li'>
+                    <EditIcon className={classes.menuIcon} />
+                        تغییر رمز عبور</Box>
                 </Button>
 
                 <Button className={classes.BTNMenu} onClick={() => { setShowShare(true), setState(false) }}>
-                    <Box component='li'>اشتراک با دوستان</Box>
+                    <Box component='li'>
+                    <EditIcon className={classes.menuIcon} />
+                        اشتراک با دوستان</Box>
                 </Button>
 
                 <Button className={classes.BTNMenu} onClick={() => { Router.push("/abus"), setState(false) }}>
-                    <Box component='li'>درباره ما</Box>
+                    <Box component='li'>
+                    <InfoIcon className={classes.menuIcon} />
+                        
+                        درباره ما</Box>
                 </Button>
-                
+
                 <Button className={classes.BTNMenu} onClick={() => { Router.push("/cntus"), setState(false) }}>
-                    <Box component='li'>تماس با ما</Box>
+                    <Box component='li'>
+                    <ContactIcon className={classes.menuIcon} />
+                        
+                        تماس با ما</Box>
                 </Button>
 
 
@@ -485,7 +526,10 @@ const Header = ({ test }) => {
                     Cookies.get("tm3fn4t867oehg4863ftbkijuhy34gvfeiu736t4n") ? (
                         <>
                             <Button className={classes.BTNMenu} onClick={() => HandleLogOut()}>
-                                <Box component='li'>خروج از حساب کاربری</Box>
+                                <Box component='li'>
+                        <SignoutIcon className={classes.menuIcon} />
+                                    
+                                    خروج از حساب کاربری</Box>
                             </Button>
                         </>
                     ) : (
@@ -512,16 +556,19 @@ const Header = ({ test }) => {
                                 className={classes.mycityButton}
                                 onClick={() => setShowModalCity(true)}
                             >
-                                <p className={classes.mycityText}>
-                                    {
-                                        ShowCity()
-                                    }
-                                </p>
-
                                 <LocationOnIcon style={{
-                                    fontSize: 20,
+                                    // fontSize: 20,
                                     color: "#525252",
                                 }} />
+                                <div>
+                                    <p className={classes.mycityText}>
+                                        {
+                                            ShowCity()
+                                        }
+                                    </p>
+                                    <ExpandMoreIcon className={classes.myCityUnderIcon} />
+                                </div>
+
                             </IconButton>
 
 

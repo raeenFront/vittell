@@ -203,7 +203,10 @@ const useStyles = makeStyles({
     color: "#e2002d !important"
   },
   likeBtn: {
-    marginRight: -10
+    marginRight: -10,
+    "& span": {
+      padding: '0px'
+    }
   },
   containerSelectShare: {
     maxWidth: "50rem",
@@ -560,31 +563,64 @@ const Posts = () => {
             </Box>
 
             <Container maxWidth='sm' >
-              <Box display='flex' justifyContent='space-between' width='100%' style={{ borderBottom: `2px solid #b8b8b8` }}>
-
-                <Box display='flex' alignItems='center' flex='1' className={classes.svgBoxAds}>
-                  <FormControlLabel
+              <Box width='100%' style={{ borderBottom: `2px solid #b8b8b8`, paddingBottom: '4rem' }}>
+                <Box display='flex' alignItems='center' flexDirection='row-reverse' flex='1' className={classes.svgBoxAds}>
+                  {/* <FormControlLabel
                     onClick={() => Cookies.get("USID") ? HandleLikePost() : (Router.push({ pathname: '/login' }), toast.success("برای ایجاد آگهی باید دارای حساب کسب و کار باشید"))}
                     checked={Like}
                     className={classes.likeBtn}
                     control={<Checkbox icon={<FavoriteBorder className={classes.likeIcon} />} checkedIcon={<Favorite className={classes.likeIcon} />} name="checkedH" />}
-                  />
-                  <IconButton onClick={() => showShareModal(true)} className={classes.Comments}>
+                  /> */}
+                  {/* <IconButton onClick={() => showShareModal(true)} className={classes.Comments}>
                     <ShareOutlinedIcon className={classes.SaveIcon} />
-                  </IconButton>
+                  </IconButton> */}
+                  <div style={{ display: 'flex', flexDirection: 'inherit', justifyContent: 'space-between', flexGrow: 'inherit' }}>
+                    <div style={{ display: 'flex', flexDirection: 'inherit' }}>
+                      <div style={{ display: 'grid', textAlign: 'center', marginRight: '10px' }}>
+                        <FormControlLabel
+                          onClick={() => Cookies.get("USID") ? HandleLikePost() : (Router.push({ pathname: '/login' }), toast.success("برای ایجاد آگهی باید دارای حساب کسب و کار باشید"))}
+                          checked={Like}
+                          className={classes.likeBtn}
+                          style={{ display: 'block' }}
+                          control={<Checkbox icon={<FavoriteBorder className={classes.likeIcon} />} checkedIcon={<Favorite className={classes.likeIcon} />} name="checkedH" />}
+                        />
+                        <span style={{ fontSize: '14px' }}>{PostDetail?.likeCount}</span>
+                      </div>
+                      <div style={{ display: 'grid', textAlign: 'center', marginRight: '10px' }} >
+                        <ChatBubbleOutlineIcon className={classes.SaveIcon} onClick={() => HandleShowComments(true)} />
+                        <span style={{ fontSize: '14px' }}>{PostDetail?.lstComment?.length}</span>
+                      </div>
+                      <div style={{ display: 'grid', textAlign: 'center', marginRight: '10px' }} onClick={() => showShareModal(true)}>
+                        <ShareOutlinedIcon className={classes.SaveIcon} />
+                        <span style={{ fontSize: '14px' }}>&nbsp;</span>
+                      </div>
+                    </div>
+                    <div style={{ display: 'flex', flexDirection: 'inherit' }}>
+                      <div style={{ display: 'grid', textAlign: 'center', marginRight: '10px' }} >
+                        <FormControlLabel
+                          onClick={() => Cookies.get("USID") ? HandleSavePost() : (Router.push({ pathname: '/login' }), toast.success("لطفا وارد اکانت کاربری خود شوید"))}
+                          checked={saved}
+                          className={classes.SaveBtn}
+                          style={{ marginTop: '-10px' }}
+                          control={<Checkbox icon={<BookmarkBorderIcon className={classes.SaveIcon} />} checkedIcon={<Bookmark className={classes.SaveIcon} />} name="checkedH" />}
+                        />
+                        <span style={{ fontSize: '14px' }}>&nbsp;</span>
+                      </div>
+                    </div>
+                  </div>
 
-                  <IconButton
+                  {/* <IconButton
                     onClick={() => HandleShowComments(true)}
                     className={classes.Comments}>
                     <ChatBubbleOutlineIcon className={classes.SaveIcon} />
-                  </IconButton>
+                  </IconButton> */}
 
-                  <FormControlLabel
+                  {/* <FormControlLabel
                     onClick={() => Cookies.get("USID") ? HandleSavePost() : (Router.push({ pathname: '/login' }), toast.success("لطفا وارد اکانت کاربری خود شوید"))}
                     checked={saved}
                     className={classes.SaveBtn}
                     control={<Checkbox icon={<BookmarkBorderIcon className={classes.SaveIcon} />} checkedIcon={<Bookmark className={classes.SaveIcon} />} name="checkedH" />}
-                  />
+                  /> */}
                 </Box>
 
                 {
@@ -658,9 +694,9 @@ const Posts = () => {
 
               </Box>
 
-              <Box my={2} pt={2} pb={2} display='flex' justifyContent='space-between' style={{ borderBottom: '2px solid #aaa', borderTop: '2px solid #aaa' }}>
-                {
-                  PostDetail?.userId === Cookies.get("USID") ? (
+              {
+                PostDetail?.userId === Cookies.get("USID") ? (
+                  <Box my={2} pt={2} pb={2} display='flex' justifyContent='space-between' style={{ borderBottom: '2px solid #aaa', borderTop: '2px solid #aaa' }}>
                     <Box>
                       <Box width='100%' className={classes.PriceItemAds2} component='span' display='inline-block'>بازدیدماهیانه :
                         <Box component='span' display='inline-block'>{PostDetail?.thisMonthVisit}</Box>
@@ -670,11 +706,11 @@ const Posts = () => {
                         <Box component='span' display='inline-block'>{PostDetail?.thisWeekVisit}</Box>
                       </Box>
                     </Box>
-                  ) : (
-                    ''
-                  )
-                }
-              </Box>
+                  </Box>
+                ) : (
+                  ''
+                )
+              }
 
 
               {
@@ -701,9 +737,9 @@ const Posts = () => {
                       <Box my={3} display='flex' width='100%' alignItems='center' justifyContent='space-between' className={classes.btnBusiness}>
                         <Btn onClick={() => Router.push(`/editpost/${PostDetail?.id}`)} >ویرایش آگهی</Btn>
                         <Btn
-                        // onClick={() => HandleSendTo(1)}
-                        onClick={() => { Router.push("/sendToHome") }}
-                         >انتقال به خانه
+                          // onClick={() => HandleSendTo(1)}
+                          onClick={() => { Router.push("/sendToHome") }}
+                        >انتقال به خانه
                         </Btn>
                       </Box>
                       <Box my={1} display='flex' width='100%' alignItems='center' justifyContent='space-between' className={classes.btnBusiness}>

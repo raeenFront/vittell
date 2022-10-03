@@ -277,7 +277,11 @@ Textarea {
   top: 40px;
   right: 17px;
 }
-
+.MuiDrawer-paper{
+  top:5% !important;
+  border-radius: 20px 0px 0px 20px !important;
+  height: 90% !important;
+}
 .AddWallIcon {
   background:  rgb(252, 0, 0);;
   font-size: 25px;
@@ -381,4 +385,17 @@ Textarea {
   input[type='url'] {
     font-size: 16px;
   }
+}
+
+/* for dotted border in category in search page */
+.MuiInput-underline.Mui-disabled::before{
+  border-bottom-style: none !important;
+}
+/* for removing scrollbar in category list home page */
+.remove_scrollbar{
+  -ms-overflow-style: none !important;  /* IE and Edge */
+  scrollbar-width: none !important; /* firefox   */
+}
+.remove_scrollbar::-webkit-scrollbar {
+  display: none !important; 
 }

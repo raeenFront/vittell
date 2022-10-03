@@ -82,14 +82,14 @@ const StoreSearchResult = () => {
                                                                                                 key={item?.id}
                                                                                                 onClick={() => Router.push(`profile/${item?.id}`)}
                                                                                         >
-                                                                                                <Box overflow='hidden' mt={3} style={{ backgroundImage: `url(' ${BASE_Image_Url} ${item?.wallpaper}')`, width: '100%', height: '17rem' }} className={classes.backgroundPicSlider}>
-                                                                                                        <img src={`${BASE_Image_Url}${item?.wallpaper}`} width='100%' />
+                                                                                                <Box overflow='hidden' mt={3} style={{ backgroundImage: `url(' ${BASE_Image_Url} ${item?.wallpaper}')`, width: '100%', height: '17rem',borderRadius:'10px' }} className={classes.backgroundPicSlider}>
+                                                                                                        <img src={`${BASE_Image_Url}${item?.wallpaper}`} width='100%'  />
                                                                                                 </Box>
                                                                                                 <Box my={1} display='flex' mx={2} alignItems='center' className={classes.avatorImageBox}>
                                                                                                         <Avatar alt="Cindy Baker" src={`${BASE_Image_Url}${item?.profileImage}`} />
                                                                                                 </Box>
 
-                                                                                                <Box component='span' fontWeight='800' display='flex' justifyContent='center' className={classes.titleOfProfile} mr={3} mt={-5}>{item?.businessName}</Box>
+                                                                                                <Box component='span' fontWeight='800' display='flex'  className={classes.titleOfProfile} mr={3} mt={-5} style={{marginRight:'9rem'}}>{item?.businessName}</Box>
                                                                                         </Grid>
                                                                                 </>
                                                                         ))
