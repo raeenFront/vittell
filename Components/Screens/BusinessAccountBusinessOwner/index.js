@@ -111,7 +111,7 @@ const useStyles = makeStyles({
     },
     backgroundPicSlider: {
         '& img': {
-            objectFit: 'cover',
+            // objectFit: 'cover',
             height: '100%'
         }
     },
@@ -332,7 +332,7 @@ const BusinessAccountBusinessOwner = () => {
                     setBusinessName(data?.businessName);
                     setBiography(data?.biography);
                     setUserProfile(data);
-                    setWallpaer(data?.wallpaper);
+                    setWallpaer(data?.wallpaper!== null?data?.wallpaper:"../images/Placeholder.PNG");
                     setDescription(data?.description);
                     setProfile(data?.profileImage);
                     setTell(data?.tell);
@@ -346,7 +346,6 @@ const BusinessAccountBusinessOwner = () => {
         })
     }, []);
 
-    console.log("sdfsdf" + PostLeinght);
 
     const handleSendToSearch = () => {
         GetAuthUrl(PINE_TO_B).then(res => {

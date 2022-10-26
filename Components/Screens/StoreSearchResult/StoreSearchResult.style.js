@@ -15,6 +15,10 @@ const useStyles = makeStyles({
             border:'2px solid #fff',
         },
     },
+    descriptionOfProfile:{
+        color: "#b9b9b9",
+        fontSize:'12px',
+    },
     titleOfProfile:{
         color:primary,
         fontSize:'1.4rem',

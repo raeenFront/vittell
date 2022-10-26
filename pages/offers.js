@@ -80,7 +80,7 @@ const NormalUserProfileIndex = () => {
         style={{ marginBottom: "40px" }}
       >
         <TitleBox
-          title='تخفیفات امروز ویتل'
+          title='تخفیفات ویتل'
         />
       </Box>
 

@@ -37,6 +37,7 @@ import Slide from '@material-ui/core/Slide';
 import CloseRoundedIcon from '@material-ui/icons/CloseRounded';
 import Fade from '@material-ui/core/Fade';
 import Loadings from '../../Common/Loading';
+import CustomeLoading from '../../Common/CustomLoading';
 
 // mrx : my variables
 const primary = theme.palette.primary.main;
@@ -110,7 +111,7 @@ const useStyles = makeStyles({
         width: '95%',
         padding: '1rem',
         fontWeight: '800',
-        marginTop:'10px',
+        marginTop: '10px',
         marginBottom: '10px',
     },
     priceitemSpan: {
@@ -120,7 +121,7 @@ const useStyles = makeStyles({
         padding: '1rem',
     },
     priceTextSpan: {
-   
+
         color: '#80808091 !important',
         height: '40px',
         borderRadius: '4px',
@@ -132,7 +133,7 @@ const useStyles = makeStyles({
         width: '49%',
     },
     btnBage: {
-        padding:'1rem',
+        padding: '1rem',
         '& Button': {
             color: '#211d70',
             minWidth: '79px !important',
@@ -205,7 +206,9 @@ const AddPostIndex = () => {
     const [ShowAddLables, setShowAddLables] = useState(false);
     const [LableValue, setLableValue] = useState("ویتل");
     const [PicDt, setPicDt] = useState([]);
-    const [AddPostLoad, setAddPostLoad] = useState(false)
+    const [AddPostLoad, setAddPostLoad] = useState(false);
+    //for loading
+    const [loading, setLoading] = useState(false);
 
     // mrx : handle set Picture
     const handleSetImage = (e) => {
@@ -249,13 +252,14 @@ const AddPostIndex = () => {
     }
 
     const HandleUploadImage = () => {
+        setLoading(true);
         const PictureFile = new FormData();
         PictureFile.append("file", Picture);
-
         PostAuthUrl(UPLOAD_POST_IMAGE_BY_ID + `?id=${Cookies.get("PostID")}&x=${PicDt?.x}&y=${PicDt?.y}&width=${PicDt?.w}&height=${PicDt?.h}`,
             PictureFile
         ).then((res, err) => {
             if (res && res.status === 200) {
+                setLoading(false);
                 toast.success("آگهی با موفقیت ثبت شد");
                 Router.push("/myprofile");
                 Cookies.remove("PostID")
@@ -263,6 +267,7 @@ const AddPostIndex = () => {
             } else {
                 toast.error(res?.data?.message);
                 setAddPostLoad(false);
+                setLoading(false);
             }
         });
     }
@@ -305,15 +310,16 @@ const AddPostIndex = () => {
 
     return (
         <>
-            <Box  height= "100vh">
+            <Box height="100vh">
+
                 <Box
                     style={{
-                        // backgroundImage: `url(${image})`,
-                        // backgroundSize: 'cover',
-                        // backgroundRepeat: 'no-repeat'
+                        backgroundImage: `url(${image})`,
+                        backgroundSize: 'cover',
+                        backgroundRepeat: 'no-repeat'
 
                     }}
-                    
+
                     mt={8}
                     className={classes.choosePicItem}
                     display='flex'
@@ -343,6 +349,8 @@ const AddPostIndex = () => {
                             marginBottom: "1rem"
                         }}
                     >
+                        <CustomeLoading display={loading} />
+
                         <input
                             accept="image/*"
                             style={{ display: "none" }}
@@ -372,6 +380,7 @@ const AddPostIndex = () => {
                                     direction="column"
                                     justify="center"
                                     alignItems="center"
+                                    style={{color: "#aaa" }}
                                 >
                                     <AddAPhotoIcon />
                                     تغییر عکس
@@ -398,13 +407,13 @@ const AddPostIndex = () => {
                         <TextareaAutosize onChange={(e) => setDescription(e.target.value)} className={classes.textereaItem} aria-label="minimum height" minRows={5} placeholder='توضیحات:' />
                     </Box>
 
-                    <Box  display='flex' justifyContent='space-between' mb={.5}  className={classes.priceitemSpan}>
+                    <Box display='flex' justifyContent='space-between' mb={.5} className={classes.priceitemSpan}>
                         <input value={Price == 0 ? "اختیاری" : Price} onChange={(e) => setPrice(e.target.value)} type="number" placeholder="قیمت(اختیاری)" className={classes.priceTextSpan} />
-                        <input  value={DisCount == 0 ? "اختیاری" : DisCount} onChange={(e) => handleSetDisPrice(e)} type="number" placeholder="تخفیف % (اختیاری)"  className={classes.priceTextSpan} />
+                        <input value={DisCount == 0 ? "اختیاری" : DisCount} onChange={(e) => handleSetDisPrice(e)} type="number" placeholder="تخفیف % (اختیاری)" className={classes.priceTextSpan} />
                     </Box>
 
 
-                    <Box  px={1.5} display='flex' width='100%' alignItems='center' justifyContent='space-between' className={classes.btnBage} >
+                    <Box px={1.5} display='flex' width='100%' alignItems='center' justifyContent='space-between' className={classes.btnBage} >
                         <Button className={classes.ButtonCustom}>برچسب ها:</Button>
                         <Button onClick={() => setShowAddLables(true)} className={classes.ButtonCustom}><AddIcon /></Button>
                         {/* <Button onClick={() => setShowAddLables(true)} className={classes.ButtonCustom}><MoreHorizIcon /></Button> */}

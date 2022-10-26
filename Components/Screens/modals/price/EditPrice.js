@@ -272,7 +272,7 @@ const EditPrice = ({ data, handleModal, handleEdit }) => {
           </div>
 
           <div className={classes.buyBox}>
-            <div className={classes.buttonBuy} onClick={() => { handleModal(false); handleEdit(editedData); }} >انجام شد</div>
+            <div className={classes.buttonBuy} onClick={() => { handleModal(false); handleEdit(editedData.filter(a=>a.title !=='')); }} >انجام شد</div>
           </div>
 
         </Grid>

@@ -64,15 +64,17 @@ const NormalUserProfileIndex = () => {
   useEffect(() => {
 
     // mrx : get saves
-    GetAuthUrl(CHANGE_USER_CITY_AUTH + `?cityId=${CityId}`).then(res => {
-      if (res && res.status === 200) {
-        const data = res?.data?.data;
-        Cookies.remove("CITID");
-        Cookies.set("CITID", CityId, { expires: 2100 });
-      } else {
-        toast.error(res?.data?.message);
-      }
-    })
+    Cookies.set("CITID", CityId, { expires: 2100 });
+
+    // GetAuthUrl(CHANGE_USER_CITY_AUTH + `?cityId=${CityId}`).then(res => {
+    //   if (res && res.status === 200) {
+    //     const data = res?.data?.data;
+    //     Cookies.remove("CITID");
+    //     Cookies.set("CITID", CityId, { expires: 2100 });
+    //   } else {
+    //     toast.error(res?.data?.message);
+    //   }
+    // })
 
   }, [CityId])
 

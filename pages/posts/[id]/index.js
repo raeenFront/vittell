@@ -559,7 +559,7 @@ const Posts = () => {
             </Container>
 
             <Box onClick={() => setShowImage(true)} mt={1} mb={1} style={{ backgroundImage: `url('/images/defult.png')`, width: '100%', }} className={classes.backgroundPicAds}>
-              <img src={BASE_Image_Url + PostDetail?.image} width='100%' objectFit='cover' />
+              <img src={BASE_Image_Url + PostDetail?.image} width='100%' /*objectFit='cover'*/ />
             </Box>
 
             <Container maxWidth='sm' >
@@ -574,7 +574,7 @@ const Posts = () => {
                   {/* <IconButton onClick={() => showShareModal(true)} className={classes.Comments}>
                     <ShareOutlinedIcon className={classes.SaveIcon} />
                   </IconButton> */}
-                  <div style={{ display: 'flex', flexDirection: 'inherit', justifyContent: 'space-between', flexGrow: 'inherit' }}>
+                  <div style={{ display: 'flex', flexDirection: 'inherit', justifyContent: 'space-between', flexGrow: 'inherit',paddingTop:'20px' }}>
                     <div style={{ display: 'flex', flexDirection: 'inherit' }}>
                       <div style={{ display: 'grid', textAlign: 'center', marginRight: '10px' }}>
                         <FormControlLabel
@@ -628,15 +628,18 @@ const Posts = () => {
                     <Box
                       flex='1'
                       mt={-7}
+                      mb={2}
                       position='relative'
                       textAlign='left'>
-                      <img className={classes.badgeSliderBoxPic} />
-                      <Box color='#fff' width='100%' right='-1.3rem'
-                        top='1.5rem' position='absolute'
-                        className={classes.badgeSliderSpanText}>
+                      <div style={{position:'absolute',left:'0',bottom:'-5px'}}>
+                        <img className={classes.badgeSliderBoxPic} />
+                        <Box color='#fff' width='100%' right='-1.3rem'
+                          top='1.5rem' position='absolute'
+                          >
 
-                        <Typography variant='h5'>%{PostDetail?.percentage}</Typography>
-                      </Box>
+                          <Typography variant='h5'>%{PostDetail?.percentage}</Typography>
+                        </Box>
+                      </div>
                     </Box>
                   ) : (
                     <Box
@@ -671,7 +674,7 @@ const Posts = () => {
               </Box>
 
 
-              <Box mt={3} style={{ justifyContent: 'space-around' }}>
+              <Box mt={3} mb={2} style={{ justifyContent: 'space-around' }}>
                 {
                   PostDetail?.price !== 0 ? (
                     <Box className={classes.PriceItemAds2} component='span'  >قیمت اصلی :
@@ -969,7 +972,7 @@ const Posts = () => {
                 borderRadius: "20px",
               }} />
             </span>
-            <img src={BASE_Image_Url + PostDetail?.image} width='100%' objectFit='cover' />
+            <img src={BASE_Image_Url + PostDetail?.image} width='100%' /*objectFit='cover'*/ />
           </Grid>
         </Fade>
       </Modal>

@@ -68,7 +68,8 @@ const useStyles = makeStyles({
   },
   sliderItemBox: {
     "& img": {
-      objectFit: "cover"
+      objectFit: "cover",
+      borderRadius: "10px",
     },
     "& span": {
       fontSize: "1.3rem",
@@ -87,15 +88,17 @@ const useStyles = makeStyles({
   sliderBoxPic: {
     position: "relative",
     borderRadius: "1rem",
-    border: `1px solid #211d7073`
+    border: `1px solid #211d7073`,
+    overflow: "visible",
   },
   PostOff: {
-    bottom: "-7px",
+    bottom: "-20px",
     position: "absolute",
     color: "#ffffff",
-    background: "#ff8600",
-    padding: "7px",
-    borderRadius: "10px",
+    background: primary,
+    // background: "#ff8600",
+    padding: "10px",
+    borderRadius: '50%',
     left: "5px"
   },
 

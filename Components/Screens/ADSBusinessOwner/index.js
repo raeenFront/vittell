@@ -98,7 +98,7 @@ const ADSBusinessOwnerIndex = () => {
 
 
       <Box mt={1} mb={1} style={{ backgroundImage: `url('/images/slider-pic.png')`, width: '100%', height: '17rem' }} className={classes.backgroundPicAds}>
-        <img src='/images/slider-pic.png' height='100%' width='100%' objectFit='cover' />
+        <img src='/images/slider-pic.png' height='100%' width='100%'  />
       </Box>
 
       <Container maxWidth='sm'>

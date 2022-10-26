@@ -100,9 +100,10 @@ const useStyles = makeStyles({
     },
     mycityButton: {
         position: "absolute",
-        right: "30px",
+        right: "50px",
         top: '-2px',
         alignItems: "flex-start",
+        
     },
     header: {
         position: 'fixed',
@@ -377,16 +378,18 @@ const Header = ({ test }) => {
             setProvinceValue("استان");
         }
         if (Cookies.get("tm3fn4t867oehg4863ftbkijuhy34gvfeiu736t4n")) {
-            // mrx : get saves
-            GetAuthUrl(CHANGE_USER_CITY_AUTH + `?cityId=${CityIdH}`).then(res => {
-                if (res && res.status === 200) {
-                    const data = res?.data?.data;
-                    Cookies.remove("CITID");
                     Cookies.set("CITID", CityIdH);
-                } else {
-                    toast.error(res?.data?.message);
-                }
-            })
+
+            // mrx : get saves
+            // GetAuthUrl(CHANGE_USER_CITY_AUTH + `?cityId=${CityIdH}`).then(res => {
+            //     if (res && res.status === 200) {
+            //         const data = res?.data?.data;
+            //         Cookies.remove("CITID");
+            //         Cookies.set("CITID", CityIdH);
+            //     } else {
+            //         toast.error(res?.data?.message);
+            //     }
+            // })
         } else {
             Cookies.remove("CITID");
             Cookies.remove("DCIT");
@@ -488,7 +491,7 @@ const Header = ({ test }) => {
                         </>
                     )
                 }
-                <Button className={classes.BTNMenu} onClick={() => { Router.push("/ResetPassword"), setState(false) }}>
+                <Button className={classes.BTNMenu} onClick={() => { Router.push("/myprofile"), setState(false) }}>
                     <Box component='li'>
                         <EditIcon className={classes.menuIcon} />
                         <span>ویرایش حساب کاربری</span>
@@ -557,7 +560,7 @@ const Header = ({ test }) => {
                                 onClick={() => setShowModalCity(true)}
                             >
                                 <LocationOnIcon style={{
-                                    // fontSize: 20,
+                                     fontSize: 35,
                                     color: "#525252",
                                 }} />
                                 <div>

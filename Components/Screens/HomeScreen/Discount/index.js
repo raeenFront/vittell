@@ -6,6 +6,7 @@ import { theme } from '../../../theme';
 import DiscountSlider from './DiscountSlider';
 import TitleBox from '../../../Common/TitleBox';
 import { makeStyles } from '@material-ui/core/styles';
+import Link from 'next/link';
 // import { theme } from '../theme';
 
 //my variables
@@ -16,7 +17,7 @@ const white = theme.palette.common.white;
 const useStyles = makeStyles({
     discountMainBox: {
         background: 'linear-gradient(to  bottom, #EDECE7, #fff)',
-                [theme.breakpoints.down('sm')]: {
+        [theme.breakpoints.down('sm')]: {
             height: '18rem !important',
 
         },
@@ -39,18 +40,19 @@ const DiscountIndex = () => {
                 <Grid container
                     direction="row"
                     justifyContent="space-between"
-                    alignItems="center" 
-                    style={{marginBottom:"6rem"}}>
+                    alignItems="center"
+                    style={{ marginBottom: "6rem" }}>
 
                     <TitleBox
                         title='تخفیف دارها'
                     />
 
-                    <Button variant="text" color='inherit' endIcon={<ArrowBackIosRoundedIcon />} onClick={() => {
-                        alert('همه تخفیف ها');
-                    }} style={{color:'#9f9f9d'}}>
-                        دیدن همه &nbsp;
-                    </Button>
+                    <Link href="/offers">
+                        <Button variant="text" color='inherit' endIcon={<ArrowBackIosRoundedIcon />}
+                            style={{ color: '#9f9f9d' }}>
+                            دیدن همه &nbsp;
+                        </Button>
+                    </Link>
                 </Grid>
 
                 <DiscountSlider />

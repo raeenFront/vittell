@@ -17,7 +17,7 @@ const RegistrationNumberModal = () => {
 
     return (
 
-            <Box height='85vh' mt={8} style={{backgroundImage:`url('/images/SignUpBackGround.png')`,objectFit:'cover',backgroundPosition:'center',backgroundRepeat:'no-repeat'}}>
+            <Box height='85vh' mt={8} style={{backgroundImage:`url('/images/SignUpBackGround.png')`/*,objectFit:'cover'*/,backgroundPosition:'center',backgroundRepeat:'no-repeat'}}>
                  <Container maxWidth='sm'>
                   <Box pt={8} display='flex' flexDirection='column' alignItems='center'  height='100vh'>
 

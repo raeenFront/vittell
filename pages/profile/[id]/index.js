@@ -66,7 +66,7 @@ const useStyles = makeStyles({
     },
     backgroundPicSlider: {
         '& img': {
-            objectFit: 'cover',
+            // objectFit: 'cover',
             height: '100%'
         }
     },
