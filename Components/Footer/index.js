@@ -136,10 +136,10 @@ const Footer = () => {
                     className={classes.root}>
                     <BottomNavigationAction
                         onClick={() => (router.push("/"), localStorage.setItem("PostID", 1))}
-                        icon={<img src='/images/footerIcon3.png' className={classes.footerIconPng} />} label="خانه" />
+                        icon={<img src={`/images/${value===0?'homered':'footerIcon3'}.png`} className={classes.footerIconPng} />} label="خانه" />
                     <BottomNavigationAction
                         onClick={() => (router.push("/offers"), localStorage.setItem("PostID", 1))}
-                        icon={<img src='/images/footerIcon2.png' className={classes.footerIconPng} />} label="تخفیف ها"
+                        icon={<img src={`/images/${value===1?'offerred':'footerIcon2'}.png`} className={classes.footerIconPng} />} label="تخفیف ها"
                     />
 
                     <BottomNavigationAction
@@ -149,11 +149,11 @@ const Footer = () => {
 
                     <BottomNavigationAction
                         onClick={() => handleGoSearch()}
-                        icon={<img src='/images/footerIcon4.png' className={classes.footerIconPng} />} label="جستجو"
+                        icon={<img src={`/images/${value===3?'searchred':'footerIcon4'}.png`} className={classes.footerIconPng} />} label="جستجو"
                     />
                     <BottomNavigationAction
                         onClick={() => Cookies.get("tm3fn4t867oehg4863ftbkijuhy34gvfeiu736t4n") ? router.push("/myprofile") : (Router.push({ pathname: '/login' }, localStorage.setItem("PostID", 1)), toast.success("برای ایجاد آگهی باید دارای حساب کسب و کار باشید"))}
-                        icon={<img src='/images/footerIcon.png' className={classes.footerIconPng} />} label="ویترین من"
+                        icon={<img src={`/images/${value===4?'profilered':'footerIcon'}.png`} className={classes.footerIconPng} />} label="ویترین من"
                     />
 
                 </BottomNavigation>
