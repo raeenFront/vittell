@@ -32,8 +32,19 @@ const BlogBox = ({ off, from, id, homePic, description, href, Offer, title }) =>
             boxShadow={3}
             width="92%"
           >
-            {Offer && off !== 0 ? (
-              <p className={classes.PostOff}>%{off}</p>
+            {off !== 0 ? (
+              // <p className={classes.PostOff}>%{off}</p>
+              <Box
+
+                mx="auto"
+                textAlign="center"
+                className={classes.bageSliderBox}
+              >
+                <div className={classes.badge_red}>
+                  <div className={classes.badge_percentage}>%{off}</div>
+                </div>
+
+              </Box>
             ) : (
               ""
             )}
@@ -45,9 +56,9 @@ const BlogBox = ({ off, from, id, homePic, description, href, Offer, title }) =>
             />
           </Box>
           <Box component="span" textAlign="right" width="100%" mr={2}>
-            {title}<br/>
-            <span style={{fontSize:'11px',color:'#acacac',marginRight:'1px'}}>
-              {description?.split(' ')?.map((item, index) => index < 2 ? item : '') }...
+            {title}<br />
+            <span style={{ fontSize: '11px', color: '#acacac', marginRight: '1px' }}>
+              {description?.split(' ')?.map((item, index) => index < 2 ? item : '')}...
             </span>
           </Box>
         </Box>
@@ -62,6 +73,27 @@ const useStyles = makeStyles({
     fontSize: '11px',
     textAlign: 'right',
   },
+  bageSliderBox: {
+    zIndex: "100"
+  }, 
+  badge_percentage: {
+    color: white,
+    fontSize: '13px',
+    position: 'relative',
+    top: '1rem',
+  },
+
+  badge_red: {
+    backgroundColor: primary,
+    borderRadius: '50%',
+    width: '3.5rem',
+    height: '3.5rem',
+    position: 'absolute',
+    left: '2px',
+    bottom: '-5%'
+  },
+  
+
   postDecriptionParent: {
     width: '65%',
     textAlign: 'right',
@@ -85,6 +117,7 @@ const useStyles = makeStyles({
       marginTop: "5px"
     }
   },
+ 
   sliderBoxPic: {
     position: "relative",
     borderRadius: "1rem",
@@ -101,6 +134,7 @@ const useStyles = makeStyles({
     borderRadius: '50%',
     left: "5px"
   },
+  
 
 });
 

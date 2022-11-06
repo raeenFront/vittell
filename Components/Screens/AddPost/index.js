@@ -72,6 +72,7 @@ const useStyles = makeStyles({
         },
     },
     boxTextereaItem: {
+        
         '& p': {
             fontWeight: '500'
         },
@@ -113,6 +114,9 @@ const useStyles = makeStyles({
         fontWeight: '800',
         marginTop: '10px',
         marginBottom: '10px',
+        overflow: 'scroll',
+        maxHeight: '200px',
+        minHeight:'200px'
     },
     priceitemSpan: {
         color: primary,
@@ -310,7 +314,7 @@ const AddPostIndex = () => {
 
     return (
         <>
-            <Box height="100vh">
+            <Box /*height="100vh"*/>
 
                 <Box
                     style={{
@@ -403,8 +407,10 @@ const AddPostIndex = () => {
                         <TextFieldItem
                             inputProps='عنوان ( حداکثر 40 کاراکتر ) : '
                             onChange={(e) => setTitle(e.target.value)}
+                            maxLength={40}
                         />
-                        <TextareaAutosize onChange={(e) => setDescription(e.target.value)} className={classes.textereaItem} aria-label="minimum height" minRows={5} placeholder='توضیحات:' />
+                        {/* this component was a textareaautosize , i changed it to text area to dont mess up the page */}
+                        <textarea onChange={(e) => setDescription(e.target.value)} className={classes.textereaItem} aria-label="minimum height" minRows={5} placeholder='توضیحات:' />
                     </Box>
 
                     <Box display='flex' justifyContent='space-between' mb={.5} className={classes.priceitemSpan}>
@@ -428,6 +434,8 @@ const AddPostIndex = () => {
                             </Box>
                         )
                     }
+                     <Box my={5} width='100%' textAlign='center' className={classes.buttonSignUp}>
+                            </Box>
 
 
                     {/* <Box mb={10} display='flex' justifyContent='space-between' width='100%' textAlign='center' className={classes.btnAddPost}>

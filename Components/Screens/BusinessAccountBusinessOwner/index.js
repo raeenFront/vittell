@@ -39,7 +39,9 @@ import {
     GET_ALL_USER_SAVES,
     GET_USER_POST_BY_ID,
     EDIT_USER,
-    PINE_TO_B
+    PINE_TO_B,
+    PROVINCE,
+    CITY_BY_PROVINCE_ID
 } from '../../../pages/api/index';
 
 // mrx : api
@@ -57,6 +59,24 @@ const secondary = theme.palette.secondary.main;
 const white = theme.palette.common.white;
 const titleColor = theme.palette.secondary.titleColor;
 const useStyles = makeStyles({
+    selectBoxTextFeildCheck: {
+        '& select': {
+            border: 'none',
+            outline: 'none',
+            borderRadius: '.5rem',
+            backgroundColor: '#d1d3d487',
+            color: '#000',
+            width: '49%',
+            fontWeight: '700',
+            padding: '.75rem',
+            boxShadow: '0px 14px 16px 0px rgba(188, 190, 192, 0.004)',
+        }
+    },
+    countBorder: {
+        border: '1px solid #fff',
+        borderRadius: '50%',
+        padding: '5px 10px'
+    },
     PostsCountSt: {
         background: "#fafafa",
         color: "#fc6b0a",
@@ -233,6 +253,12 @@ const BusinessAccountBusinessOwner = () => {
     const [LoadingWallpaper, setLoadingWallpaper] = useState(false);
     const [LoadingProfile, setLLoadingProfile] = useState(false);
     const [PostLeinght, setPostLeinght] = useState(16);
+    const [Province, setProvince] = useState([]);
+    const [City, setCity] = useState([]);
+    const [ProvinceId, setProvinceId] = useState(null);
+    const [CityId, setCityId] = useState(null);
+    const [CityValue, setCityValue] = useState("انتخاب شهر");
+    const [ProvinceValue, setProvinceValue] = useState("انتخاب استان");
 
     const handleChangeUserPost = (e) => {
         setUserPost(e);
@@ -332,7 +358,7 @@ const BusinessAccountBusinessOwner = () => {
                     setBusinessName(data?.businessName);
                     setBiography(data?.biography);
                     setUserProfile(data);
-                    setWallpaer(data?.wallpaper!== null?data?.wallpaper:"../images/Placeholder.PNG");
+                    setWallpaer(data?.wallpaper !== null ? data?.wallpaper : "../images/Placeholder.PNG");
                     setDescription(data?.description);
                     setProfile(data?.profileImage);
                     setTell(data?.tell);
@@ -340,11 +366,41 @@ const BusinessAccountBusinessOwner = () => {
                     setWhatsApp(data?.whatsApp);
                     setInstagram(data?.instagram);
                     setTelegram(data?.telegram);
+                    setCityId(data?.cityId);
+                    setCityValue(data?.cityName);
                     setLoading(false);
+
                 }
             }
         })
+        //getting the provinces
+        GetUrl(PROVINCE).then(res => {
+
+            if (res && res.status === 200) {
+                const data = res?.data?.data;
+                setProvince(data);
+            } else {
+                toast.error(res?.data?.message);
+            }
+        });
     }, []);
+    useEffect(() => {
+        // mrx : get citys by Province id
+        GetUrl(CITY_BY_PROVINCE_ID + `?provinceId=${ProvinceId}`, {
+            provinceId: ProvinceId,
+        }).then((res, err) => {
+            if (res && res?.status === 200) {
+                if (res?.data?.isSuccess) {
+                    const data = res?.data?.data;
+                    setCity(data);
+                } else {
+                    toast.error(res?.data?.message);
+                }
+            } else {
+                toast.error(res?.data?.message);
+            }
+        });
+    }, [ProvinceId])
 
 
     const handleSendToSearch = () => {
@@ -367,7 +423,8 @@ const BusinessAccountBusinessOwner = () => {
             WebSite: Instagram,
             description: Description,
             whatsApp: WhatsApp,
-            cityId: UserInfo?.cityId,
+            // cityId: UserInfo?.cityId,
+            cityId: CityId,
             categoryId: UserInfo?.categoryId,
             biography: Biography,
             businessName: BusinessName,
@@ -490,7 +547,7 @@ const BusinessAccountBusinessOwner = () => {
                                     درصورت تمایل برای دیده شدن صفحه فروشگاهتان، در ابتدای صفحه جستجو فروشگاها، می توانید از این بخش وارد شوید
                                 </Typography>
 
-                                <Btn className={classes.editBtnItem} onClick={() =>/* handleSendToSearch()*/ { setSentToPageType(2); setShowSendToPage(true) }} variant='contained'>انتقال به جستجو</Btn>
+                                <Btn className={classes.editBtnItem} onClick={() =>/* handleSendToSearch()*/ { setSentToPageType(3); setShowSendToPage(true) }} variant='contained'>انتقال به جستجو</Btn>
                             </Box>
 
                             <Box component='span' fontWeight='bold' display='flex' className={classes.titleOfProfile}>تعدادبازدید :
@@ -503,7 +560,7 @@ const BusinessAccountBusinessOwner = () => {
                                         {/* <img src='/images/postIcon.png' width='30px' style={{ paddingLeft: 10 }} />
                                         <Box component='span' mt={.5}>آگهی های من <spna className={classes.PostsCountSt}>{PostCount}</spna></Box> */}
                                         <span>آگهی های من</span>&nbsp;&nbsp;&nbsp;&nbsp;
-                                        <span>{SavesCount} پست</span>
+                                        <span className={classes.countBorder} style={UserPost === 1 ? { borderColor: '#fff' } : { borderColor: '#000' }}>{PostCount} </span>
                                     </Button>
                                 </Box>
                                 <Box className={`${classes.profile_post_select} ${UserPost === 2 ? classes.profile_post_selected : ''}`} display='flex' flexDirection='column' alignItems='center' justifyContent='center'>
@@ -511,7 +568,7 @@ const BusinessAccountBusinessOwner = () => {
                                         {/* <img src='/images/penIcon.png' width='30px' style={{ paddingLeft: 10 }} />
                                         <Box component='span' mt={.5}>نشان شده ها <spna className={classes.PostsCountSt}>{SavesCount} پست</spna></Box> */}
                                         <span>نشان شده ها</span>&nbsp;&nbsp;&nbsp;&nbsp;
-                                        <span>{SavesCount} پست</span>
+                                        <span className={classes.countBorder} style={UserPost === 2 ? { borderColor: '#fff' } : { borderColor: '#000' }}>{SavesCount} </span>
                                     </Button>
 
                                 </Box>
@@ -657,8 +714,8 @@ const BusinessAccountBusinessOwner = () => {
             >
                 <Slide direction="up" in={ShowModalTell} mountOnEnter unmountOnExit>
                     <Grid className={classes.containerSelect} style={{ width: '100%', height: '100vh', borderRadius: '0px' }} container justify="center">
-                        <div style={{width:'100%', textAlign:'left',marginBottom:'20px'}}>
-                            <BackIcon style={{fontSize:'2.5rem'}} onClick={()=>setShowModalTell(false)} />
+                        <div style={{ width: '100%', textAlign: 'left', marginBottom: '20px' }}>
+                            <BackIcon style={{ fontSize: '2.5rem' }} onClick={() => setShowModalTell(false)} />
                         </div>
 
                         <input
@@ -723,6 +780,27 @@ const BusinessAccountBusinessOwner = () => {
                             className={classes.Input}
                             type="text"
                         /> */}
+
+                        <Box display='flex' width='95%' justifyContent='space-evenly' className={classes.selectBoxTextFeildCheck}>
+                            <select
+                                className={classes.selectItemTextFeildCheck}
+                                id="demo-simple-select-outlined22"
+                                onChange={(e) => setProvinceId(e.target.value)}
+                            >
+                                <option>{ProvinceValue}</option>
+                                {Province && Province?.map((item) => <option onClick={(e) => setProvinceId(e.target.value)} key={item?.id} value={item?.id}>{item?.name}</option>)}
+                            </select>
+
+                            <select
+                                className={classes.selectItemTextFeildCheck}
+                                id="demo-simple-select-outlined222"
+                                onChange={(e) => setCityId(e.target.value)}
+                            >
+                                <option>{CityValue}</option>
+                                {City && City?.map((item) => <option key={item?.id} value={item?.id}>{item?.name}</option>)}
+                            </select>
+
+                        </Box>
 
 
                         <Button

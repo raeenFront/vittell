@@ -264,9 +264,9 @@ const Profile = () => {
                         />
 
                     </Button>
-                <Button  className={classes.price_list_btn} onClick={() => { Router.push("/priceList/"+UserID), setState(false) }}>لیست قیمت</Button>
                 </Box>
                 <Box mb={3} pb={2} style={{textAlign: 'center' ,borderBottom: '2px solid #aaa' }}>
+                <Button  className={classes.price_list_btn} onClick={() => { Router.push("/priceList/"+UserID), setState(false) }}>لیست قیمت</Button>
 
                 </Box>
 

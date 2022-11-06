@@ -90,6 +90,7 @@ const AdvertisIndex = () => {
                                         homePic={BASE_Image_Url + item.image}
                                         title={item.title}
                                         description={item.description}
+                                        off={item?.percentage}
                                     />
                                 ))
                             }
@@ -109,6 +110,8 @@ const AdvertisIndex = () => {
                                         homePic={BASE_Image_Url + item.image}
                                         title={item.title}
                                         description={item.description}
+                                        off={item?.percentage}
+
                                     />
                                 ))
                             }

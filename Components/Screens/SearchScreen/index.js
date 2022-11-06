@@ -23,6 +23,7 @@ import useStyles from './SearchScreen.style';
 
 // mrx : material ui
 import SearchIcon from '@material-ui/icons/Search';
+import DeleteIcon from '@material-ui/icons/Clear';
 import { Box, Container, Grid, Button } from '@material-ui/core';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
@@ -233,6 +234,13 @@ const SearchScreenIndex = () => {
             disabled
           />
         </Box>
+        {
+          // category && category.name && (
+
+          //   <DeleteIcon onClick={()=>{setCategory({name:''})}}
+          //     style={{position:'absolute',left:'11%',marginTop:'7%',color:'red'}} />
+          // )
+        }
 
 
       </Box>
@@ -254,6 +262,7 @@ const SearchScreenIndex = () => {
                       homePic={BASE_Image_Url + item?.image}
                       title={item?.title}
                       description={item?.description}
+                      off={item?.percentage}
                     />
                   ))}
               </>
@@ -286,6 +295,7 @@ const SearchScreenIndex = () => {
                       homePic={BASE_Image_Url + item?.image}
                       title={item?.title}
                       description={item?.description}
+                      off={item?.percentage}
                     />
                   ))}
               </>

@@ -5,6 +5,8 @@ import Router, { withRouter, useRouter } from 'next/router';
 // mrx : cookie
 import Cookies from 'js-cookie';
 import SocialMediaIcon from '../../Components/Common/SocialMediaIcon';
+//components
+import LogoutModal from '../../Components/Screens/modals/logout/Logout';
 
 import {
     TelegramIcon,
@@ -57,8 +59,9 @@ import Bookmark from '@material-ui/icons/Bookmark';
 import WhatsAppIcon from '@material-ui/icons/WhatsApp';
 import InstagramIcon from '@material-ui/icons/Instagram';
 import EditIcon from '@material-ui/icons/Edit';
-//  import PasswordIcon from '@material-ui/icons/Key';
-// import SharedIcon from '@material-ui/icons/Polyline';
+import KeyIcon from '@material-ui/icons/VpnKey';
+// import PasswordIcon from '@material-ui/icons/Key';
+import ShareIcon from '@material-ui/icons/Share';
 import InfoIcon from '@material-ui/icons/Info';
 import ContactIcon from '@material-ui/icons/CallEnd';
 import SignoutIcon from '@material-ui/icons/Input';
@@ -265,6 +268,8 @@ const Header = ({ test }) => {
 
     const [ProfileInfo, setProfileInfo] = useState([]);
     const [ShowShare, setShowShare] = useState(false);
+    //for show sign out modal
+    const [showLogoutModal , setShowLogoutModal] = useState(false);
 
     const handleChange = (event) => {
         setAge(event.target.value);
@@ -491,21 +496,21 @@ const Header = ({ test }) => {
                         </>
                     )
                 }
-                <Button className={classes.BTNMenu} onClick={() => { Router.push("/myprofile"), setState(false) }}>
+                {/* <Button className={classes.BTNMenu} onClick={() => { Router.push("/myprofile"), setState(false) }}>
                     <Box component='li'>
                         <EditIcon className={classes.menuIcon} />
                         <span>ویرایش حساب کاربری</span>
                     </Box>
-                </Button>
+                </Button> */}
                 <Button className={classes.BTNMenu} onClick={() => { Router.push("/ResetPassword"), setState(false) }}>
                     <Box component='li'>
-                    <EditIcon className={classes.menuIcon} />
+                    <KeyIcon className={classes.menuIcon} />
                         تغییر رمز عبور</Box>
                 </Button>
 
                 <Button className={classes.BTNMenu} onClick={() => { setShowShare(true), setState(false) }}>
                     <Box component='li'>
-                    <EditIcon className={classes.menuIcon} />
+                    <ShareIcon className={classes.menuIcon} />
                         اشتراک با دوستان</Box>
                 </Button>
 
@@ -528,7 +533,7 @@ const Header = ({ test }) => {
                 {
                     Cookies.get("tm3fn4t867oehg4863ftbkijuhy34gvfeiu736t4n") ? (
                         <>
-                            <Button className={classes.BTNMenu} onClick={() => HandleLogOut()}>
+                            <Button className={classes.BTNMenu} onClick={() => /*HandleLogOut()*/ setShowLogoutModal(true)}>
                                 <Box component='li'>
                         <SignoutIcon className={classes.menuIcon} />
                                     
@@ -688,6 +693,11 @@ const Header = ({ test }) => {
                     </Grid>
                 </Slide>
             </Modal>
+            {
+                showLogoutModal && (
+                    <LogoutModal open={showLogoutModal} handleModal={()=>setShowLogoutModal(false)} handleEdit={HandleLogOut} />
+                )
+            }
 
         </Container>
     );

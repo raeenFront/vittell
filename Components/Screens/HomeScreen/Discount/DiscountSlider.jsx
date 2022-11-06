@@ -96,23 +96,7 @@ const DiscountSlider = () => {
                         <div className={classes.badge_red}>
                           <span className={classes.badge_percentage}>%{item.percentage}</span>
                         </div>
-                        {/* <img
-                          // src="/images/bageItemPic.png"
-                          className={classes.badgeSliderBoxPic}
-                          style={{ backgroundColor: primary, borderRadius: '50px' }}
-                        />
-                        <Box
-                          color="#fff"
-                          width="100%"
-                          top="-1rem"
-                          right="-3rem"
-                          position="absolute"
-                          className={classes.badgeSliderSpanText}
-                        >
-                          <Typography variant="h5">
-                            %{item.percentage}
-                          </Typography>
-                        </Box> */}
+                        
                       </Box>
                     ) : (
                       ""

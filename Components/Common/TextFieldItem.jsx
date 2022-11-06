@@ -21,7 +21,8 @@ const TextFieldItem = ({
   type,
   backgroundColor,
   myClasses,
-  icon
+  icon,
+  maxLength=-1,
 }) => {
   const classes = useStyles();
   return (
@@ -30,7 +31,10 @@ const TextFieldItem = ({
         startAdornment: (
           <InputAdornment position="start">{inputProps}</InputAdornment>
         ),
-        endAdornment: <InputAdornment position="end">{icon}</InputAdornment>
+        endAdornment: <InputAdornment position="end">{icon}</InputAdornment>,
+      }}
+      inputProps={{
+        maxLength: maxLength,
       }}
       disabled={disabled}
       value={value}

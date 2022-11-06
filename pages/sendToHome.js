@@ -79,6 +79,7 @@ const useStyles = makeStyles({
     cursor: 'pointer',
     width:'20%',
     textAlign: 'center',
+    margin:'auto',
   },
   containerSelect: {
     backgroundColor: "#EDECE7",

@@ -20,6 +20,7 @@ import Cookies from 'js-cookie';
 // mrx : styles
 import { theme } from '../../../Components/theme';
 
+import SentToPage from '../../sendToHome'
 // mrx : material ui
 import {
   Box,
@@ -362,6 +363,10 @@ const Posts = () => {
   const [Labels, setLabels] = useState([]);
   const [ShowImage, setShowImage] = useState(false);
 
+  //modal send to page
+  const [showSendToPage, setShowSendToPage] = useState(false);
+  const [sentToPageType, setSentToPageType] = useState(1);
+
   // mrx : get post id
   const { id } = router.query;
 
@@ -558,6 +563,12 @@ const Posts = () => {
               </Box>
             </Container>
 
+            {
+        showSendToPage ?
+          <SentToPage handleModal={setShowSendToPage} type={sentToPageType} handleOk={sentToPageType===1?()=>HandleSendTo(1):()=>HandleSendTo(2)} />
+          : <></>
+      }
+
             <Box onClick={() => setShowImage(true)} mt={1} mb={1} style={{ backgroundImage: `url('/images/defult.png')`, width: '100%', }} className={classes.backgroundPicAds}>
               <img src={BASE_Image_Url + PostDetail?.image} width='100%' /*objectFit='cover'*/ />
             </Box>
@@ -574,7 +585,7 @@ const Posts = () => {
                   {/* <IconButton onClick={() => showShareModal(true)} className={classes.Comments}>
                     <ShareOutlinedIcon className={classes.SaveIcon} />
                   </IconButton> */}
-                  <div style={{ display: 'flex', flexDirection: 'inherit', justifyContent: 'space-between', flexGrow: 'inherit',paddingTop:'20px' }}>
+                  <div style={{ display: 'flex', flexDirection: 'inherit', justifyContent: 'space-between', flexGrow: 'inherit', paddingTop: '20px' }}>
                     <div style={{ display: 'flex', flexDirection: 'inherit' }}>
                       <div style={{ display: 'grid', textAlign: 'center', marginRight: '10px' }}>
                         <FormControlLabel
@@ -631,11 +642,11 @@ const Posts = () => {
                       mb={2}
                       position='relative'
                       textAlign='left'>
-                      <div style={{position:'absolute',left:'0',bottom:'-5px'}}>
+                      <div style={{ position: 'absolute', left: '0', bottom: '-5px' }}>
                         <img className={classes.badgeSliderBoxPic} />
                         <Box color='#fff' width='100%' right='-1.3rem'
                           top='1.5rem' position='absolute'
-                          >
+                        >
 
                           <Typography variant='h5'>%{PostDetail?.percentage}</Typography>
                         </Box>
@@ -741,12 +752,16 @@ const Posts = () => {
                         <Btn onClick={() => Router.push(`/editpost/${PostDetail?.id}`)} >ویرایش آگهی</Btn>
                         <Btn
                           // onClick={() => HandleSendTo(1)}
-                          onClick={() => { Router.push("/sendToHome") }}
+                          // onClick={() => { Router.push("/sendToHome") }}
+                          onClick={() => { setSentToPageType(1); setShowSendToPage(true) }}
+
                         >انتقال به خانه
                         </Btn>
                       </Box>
                       <Box my={1} display='flex' width='100%' alignItems='center' justifyContent='space-between' className={classes.btnBusiness}>
-                        <Btn onClick={() => HandleSendTo(2)}>درج تخفیفات</Btn>
+                        <Btn 
+                          onClick={() =>/* handleSendToSearch()*/ { setSentToPageType(2); setShowSendToPage(true) }}
+                        >درج تخفیفات</Btn>
 
                         <Btn onClick={() => setShowModalAccept(true)} >حذف آگهی</Btn>
                       </Box>
@@ -1018,6 +1033,7 @@ const Posts = () => {
           </Grid>
         </Slide>
       </Modal>
+      
     </>
   );
 }
