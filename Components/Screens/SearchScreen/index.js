@@ -66,14 +66,14 @@ const SearchScreenIndex = () => {
   const [LoadingPost, setLoadingPost] = useState(true);
   const [showSelectCategoryModal, setShowSelectCategoryModal] = useState(false);
   const [PostLeinght, setPostLeinght] = useState(16);
-  
+
   const ChangeSearchType = (event) => {
     setSearchType(event);
   };
-  
+
   const PostID = typeof window !== "undefined" ? localStorage.getItem("PostID") || '1' : '1';
   const SearchInputs = typeof window !== "undefined" ? JSON.parse(localStorage.getItem("SearchInputs")) || '{}' : '{}';
-  
+
   const [category, setCategory] = useState(null);
   const [Search, setSearch] = useState(SearchInputs?.title ? SearchInputs?.title : "");
 
@@ -144,7 +144,7 @@ const SearchScreenIndex = () => {
 
     if (SearchInputs?.title?.length === undefined) {
       // mrx : get All Posts
-      GetUrl(GET_ALL_SEARCH_POSTS + `?cityId=${Cookies.get("CITID")}` + `${SearchInputs?.category!==null?'&categoryId='+SearchInputs?.category?.id : ''}`).then((res, err) => {
+      GetUrl(GET_ALL_SEARCH_POSTS + `?cityId=${Cookies.get("CITID")}` + `${SearchInputs?.category !== null ? '&categoryId=' + SearchInputs?.category?.id : ''}`).then((res, err) => {
         if (res && res?.status === 200) {
           const data = res?.data?.data;
           setAllPosts(data);
@@ -161,11 +161,18 @@ const SearchScreenIndex = () => {
 
   }, [])
 
+  useEffect(()=>{
+    if(!showSelectCategoryModal)
+    handleSearch(2);
+  },[category])
+
 
   return (
     <Container maxWidth='sm'>
-
-      <Box pt={13} style={{
+       <Box pt={13} style={{textAlign:'right',fontSize:'14px'}}   justifyContent='space-around'>
+        جست وجو بر اساس :
+      </Box>
+      <Box pt={2} style={{
       }} className={classes.formCheckBoxSearch} display='flex' justifyContent='space-around'>
 
         <Button
@@ -198,26 +205,26 @@ const SearchScreenIndex = () => {
 
 
 
-      <Box pb={3} style={{ borderBottom: `2px solid #aaa`, }}  width='100%' textAlign='center' display='flex' className={classes.searchItemBox}>
-        <TextFieldItem           
-          width= "70%"
+      <Box pb={3} style={{ borderBottom: `2px solid #aaa`, }} width='100%' textAlign='center' display='flex' className={classes.searchItemBox}>
+        <TextFieldItem
+          width="70%"
           icon={<SearchIcon />}
           placeHolderText='نام محصول مورد نظر را وارد کنید'
           value={Search}
           onChange={(e) => setSearch(e.target.value)}
-          
+
         />
-        <Button onClick={() => handleSearch()} variant='contained'  
-                  style={{
-                    background: "rgb(239 75 76)" ,
-                    padding: "10px 20px",
-                    border: '2px solid  rgb(239 75 76)',
-                    borderRadius: '1rem',
-                    width: "45%",
-                    color: '#fff',
-                    height:"40px",
-                    marginRight: "15px"
-                  }}  >جستجو</Button>
+        <Button onClick={() => handleSearch()} variant='contained'
+          style={{
+            background: "rgb(239 75 76)",
+            padding: "10px 20px",
+            border: '2px solid  rgb(239 75 76)',
+            borderRadius: '1rem',
+            width: "45%",
+            color: '#fff',
+            height: "40px",
+            marginRight: "15px"
+          }}  >جستجو</Button>
       </Box>
 
 
@@ -228,7 +235,7 @@ const SearchScreenIndex = () => {
           marginRight: "8px",
         }} onClick={() => setShowSelectCategoryModal(true)}>
           <TextFieldItem
-            inputProps=' دسته بندی'
+            inputProps='دسته بندی فروشگاه'
             value={category && category?.name}
             backgroundColor='#fff'
             disabled
@@ -245,7 +252,7 @@ const SearchScreenIndex = () => {
 
       </Box>
 
-      <Grid style={{ display: " inline-flex",width:'100%' }}>
+      <Grid style={{ display: " inline-flex", width: '100%' }}>
         <Box style={{ width: "50%" }} flexWrap='wrap' mb={10}>
           {
             LoadingPost ? (

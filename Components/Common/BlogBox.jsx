@@ -32,7 +32,7 @@ const BlogBox = ({ off, from, id, homePic, description, href, Offer, title }) =>
             boxShadow={3}
             width="92%"
           >
-            {off !== 0 ? (
+            {off !== 0 && off!=null ? (
               // <p className={classes.PostOff}>%{off}</p>
               <Box
 

@@ -188,6 +188,7 @@ const NormalUserProfileIndex = () => {
                       homePic={BASE_Image_Url + item?.postImage}
                       title={item?.postTitle}
                       description={item?.postDescription}
+                      off={item?.percentage}
                     />
                   ))}
               </>
@@ -224,6 +225,7 @@ const NormalUserProfileIndex = () => {
                       homePic={BASE_Image_Url + item?.postImage}
                       title={item?.postTitle}
                       description={item?.postDescription}
+                      off={item?.percentage}
                     />
                   ))}
               </>

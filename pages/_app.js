@@ -21,6 +21,7 @@ import Footer from '../Components/Footer/index';
 // mrx : material ui
 import { Container } from '@material-ui/core';
 import CssBaseline from '@material-ui/core/CssBaseline'
+import SplashScreen from '../Components/Screens/modals/SplashScreen';
 
 // alert
 import { ToastContainer, toast } from 'react-toastify';
@@ -80,6 +81,7 @@ function MyApp({ Component, pageProps }) {
             <title>ویتل</title>
           </Head>
           <Header />
+          <SplashScreen />
           <div style={{backgroundColor : '#EDECE7'}}>
             <ToastContainer />
             <Component {...pageProps} />

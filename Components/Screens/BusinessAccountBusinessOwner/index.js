@@ -596,6 +596,7 @@ const BusinessAccountBusinessOwner = () => {
                                                                         homePic={BASE_Image_Url + item?.postImage}
                                                                         title={item?.postTitle}
                                                                         description={item?.postDescription}
+                                                                        off={item?.percentage}
                                                                     />
                                                                 ))}
                                                         </>
@@ -626,6 +627,7 @@ const BusinessAccountBusinessOwner = () => {
                                                                         homePic={BASE_Image_Url + item?.postImage}
                                                                         title={item?.postTitle}
                                                                         description={item?.postDescription}
+                                                                        off={item?.percentage}
                                                                     />
                                                                 ))}
                                                         </>
@@ -663,6 +665,7 @@ const BusinessAccountBusinessOwner = () => {
                                                                         homePic={BASE_Image_Url + item?.image}
                                                                         title={item?.title}
                                                                         description={item?.description}
+                                                                        off ={item?.percentage}
                                                                     />
                                                                 ))}
                                                         </>
@@ -683,6 +686,7 @@ const BusinessAccountBusinessOwner = () => {
                                                                         homePic={BASE_Image_Url + item?.image}
                                                                         title={item?.title}
                                                                         description={item?.description}
+                                                                        off={item?.percentage}
                                                                     />
                                                                 ))}
                                                         </>
