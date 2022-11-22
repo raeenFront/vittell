@@ -19,7 +19,7 @@ import MainSlider from '../HomeScreen/Slider';
 import { Contexts } from "../../../contexts/index";
 
 // mrx : api links
-import { BASE_Image_Url } from '../../../pages/api/index';
+import { BASE_Image_Url, DEFAULT_WALLPAPER } from '../../../pages/api/index';
 
 // my variables
 const primary = theme.palette.primary.main;
@@ -76,13 +76,14 @@ const StoreSearchResult = () => {
                                                 <>
                                                         {
                                                                 SearchUser === null ? <p>کسب و کاری با جست و جوی شما یافت نشد</p> : SearchUser &&
-                                                                        SearchUser?.map((item) => (
+                                                                        SearchUser?.filter(a => a.businessName)?.map((item) => (
                                                                                 <>
                                                                                         <Grid
                                                                                                 key={item?.id}
                                                                                                 onClick={() => Router.push(`profile/${item?.id}`)}
                                                                                         >
-                                                                                                <Box overflow='hidden' mt={3} style={{ backgroundImage: `url(' ${BASE_Image_Url} ${item?.wallpaper}')`, width: '100%', height: '17rem', borderRadius: '10px' }} className={classes.backgroundPicSlider}>
+                                                                                                {/* ${BASE_Image_Url} ${item?.wallpaper} */}
+                                                                                                <Box overflow='hidden' mt={3} style={{ backgroundImage: `url('${item?.wallpaper ? BASE_Image_Url + item?.wallpaper : DEFAULT_WALLPAPER} ')`, width: '100%', height: '17rem',backgroundSize:'contain', borderRadius: '10px' }} className={classes.backgroundPicSlider}>
                                                                                                         <img src={`${BASE_Image_Url}${item?.wallpaper}`} width='100%' />
                                                                                                 </Box>
                                                                                                 <Box my={1} display='flex' mx={2} alignItems='center' className={classes.avatorImageBox}>

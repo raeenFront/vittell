@@ -46,6 +46,8 @@ const white = theme.palette.common.white;
 
 const useStyles = makeStyles({
     buttonSignUp: {
+        marginBottom:'20px',
+        paddingBottom:'40px',
         '& button': {
             width: '40%',
         }
@@ -229,13 +231,18 @@ const AddPostIndex = () => {
         setAddPostLoad(true)
         // mrx : make labales to the array of string ["test1","test2"]
         setlables(lablesId && lablesId?.map((item) => item.LableValue))
-
-        if (Title?.length > 30) {
+        if(!Title)
+        {
+            toast.error("وارد کردن عنوان آگهی الزامی می باشد")
+            setAddPostLoad(false)
+            return;
+        }
+        if (Title?.length > 40) {
             toast.error("تعداد کاراکتر عنوان طولانی می باشد")
             setAddPostLoad(false)
         } else {
             PostAuthUrl(ADD_POST_AUTH, {
-                Title: Title,
+                Title: Title.subString(0,40),
                 Description: Description,
                 Price: Price ? parseInt(Price) : 0,
                 // DisPrice: DisCount ? parseInt(DisCount) : 0,
@@ -429,7 +436,7 @@ const AddPostIndex = () => {
                         AddPostLoad ? (
                             <Loadings />
                         ) : (
-                            <Box my={5} width='100%' textAlign='center' className={classes.buttonSignUp}>
+                            <Box my={5} mb={3} width='100%' textAlign='center' className={classes.buttonSignUp}>
                                 <Btn onClick={() => HandleAddPost()} variant="contained" width='30%'>ثبت</Btn>
                             </Box>
                         )

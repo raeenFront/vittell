@@ -95,7 +95,7 @@ const SearchScreenIndex = () => {
     if (SearchType === 1) {
       setLoadingPost(true);
       // GetUrl(GET_ALL_SEARCH_POSTS + `?search=${Search}&provinceId=${ProvinceId}&cityId=${CityId}&categoryId=${category?.id}`)
-      GetUrl(GET_ALL_SEARCH_POSTS + `?search=${Search ? Search : ""}&categoryId=${category?.id ? category?.id : null}`)
+      GetUrl(GET_ALL_SEARCH_POSTS + `?search=${Search ? Search : ""}&cityId=${Cookies.get("CITID")}&categoryId=${category?.id ? category?.id : null}`)
         .then((res, err) => {
           if (res && res.status === 200) {
             const data = res.data.data;

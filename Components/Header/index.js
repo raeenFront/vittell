@@ -437,7 +437,7 @@ const Header = ({ test }) => {
         setCityIdH(e.target.value);
         Cookies.set("ISFIRST", e.target.value);
         Cookies.set("ISDefult", false);
-        Cookies.set("CITN", JSON.stringify(City?.filter((item) => item?.id === Cookies.get('ISFIRST'))[0]?.name) ?? "شهر من");
+        Cookies.set("CITN", JSON.stringify(City?.filter((item) => item?.id === e.target.value)[0]?.name) ?? "شهر من");
         setTimeout(function () {
             router.reload();
         }, 2000);

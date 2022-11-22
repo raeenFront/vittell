@@ -26,6 +26,7 @@ import {
     GET_ANY_USER_BY_ID,
     BASE_Image_Url,
     GET_USER_POST_BY_ID,
+    DEFAULT_WALLPAPER,
 } from '../../../pages/api/index';
 
 // mrx : api
@@ -214,7 +215,7 @@ const Profile = () => {
     return (
         <>
             <Box boxShadow={3} mt={8} style={{ backgroundImage: `url('/images/slider-pic.png')`, width: '100%', height: '17rem' }} className={classes.backgroundPicSlider}>
-                <img src={BASE_Image_Url + Wallpaer} height='100%' width='100%' />
+                <img src={Wallpaer? BASE_Image_Url + Wallpaer  : DEFAULT_WALLPAPER} height='100%' width='100%' />
             </Box>
             <Box mx={1} display='flex' justifyContent='space-between' alignItems='center' className={classes.avatorImageBox}>
                 <Box position='relative'>

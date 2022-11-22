@@ -3,6 +3,9 @@ export const HEADER_BASE = {
   "Accept-Language": "fr-IR,fr;q=0.5",
 };
 
+//const address
+export const DEFAULT_WALLPAPER = "/images/Placeholder.PNG";
+
 // mrx : base url
 export const BASE_URL = `https://vitell.arezouarmina.ir/api`;
 

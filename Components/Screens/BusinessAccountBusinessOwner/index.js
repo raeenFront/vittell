@@ -10,6 +10,7 @@ import BlogBox from '../../Common/BlogBox';
 import SocialMediaIcon from '../../Common/SocialMediaIcon';
 import Btn from '../../Common/Button';
 import Loadings from '../../Common/Loading';
+import Loading from '../../Common/CustomLoading';
 import SentToPage from '../../../pages/sendToHome';
 
 // mrx : loading
@@ -41,7 +42,8 @@ import {
     EDIT_USER,
     PINE_TO_B,
     PROVINCE,
-    CITY_BY_PROVINCE_ID
+    CITY_BY_PROVINCE_ID,
+    DEFAULT_WALLPAPER
 } from '../../../pages/api/index';
 
 // mrx : api
@@ -184,6 +186,20 @@ const useStyles = makeStyles({
         margin: "10px 5px 0px 0px",
         width: "100%",
     },
+    biographytitle2: {
+        background: "#fafafa",
+        height: "116px",
+        border: "none",
+        overflow: "hidden",
+        margin: "30px 20px 10px",
+        paddingTop: "20px",
+        width: "100%",
+        // background: 'linear-gradient(to  bottom, #EDECE7, #fff)',
+        background:'transparent',
+        // borderTop: '2px solid #aaa' 
+
+
+    },
     alertBoxItem: {
         backgroundColor: "#B8B8B8",
         borderRadius: '1rem',
@@ -236,7 +252,7 @@ const BusinessAccountBusinessOwner = () => {
     const [sentToPageType, setSentToPageType] = useState(1);
 
     // mrx : ShowModalTell of pictures
-    const [Wallpaer, setWallpaer] = useState("../images/Placeholder.PNG");
+    const [Wallpaer, setWallpaer] = useState(null);
     const [Profile, setProfile] = useState("../images/Placeholder.PNG");
     const [WallpaerPic, setWallpaerPic] = useState("");
     const [ProfilePic, setProfilePic] = useState("");
@@ -250,7 +266,7 @@ const BusinessAccountBusinessOwner = () => {
     const [PicDt, setPicDt] = useState([]);
     const [PicDtP, setPicDtP] = useState([]);
     const [UserPost, setUserPost] = useState(1);
-    const [LoadingWallpaper, setLoadingWallpaper] = useState(false);
+    const [LoadingWallpaper, setLoadingWallpaper] = useState(true);
     const [LoadingProfile, setLLoadingProfile] = useState(false);
     const [PostLeinght, setPostLeinght] = useState(16);
     const [Province, setProvince] = useState([]);
@@ -358,7 +374,7 @@ const BusinessAccountBusinessOwner = () => {
                     setBusinessName(data?.businessName);
                     setBiography(data?.biography);
                     setUserProfile(data);
-                    setWallpaer(data?.wallpaper !== null ? data?.wallpaper : "../images/Placeholder.PNG");
+                    setWallpaer(data?.wallpaper);
                     setDescription(data?.description);
                     setProfile(data?.profileImage);
                     setTell(data?.tell);
@@ -444,6 +460,7 @@ const BusinessAccountBusinessOwner = () => {
 
     return (
         <>
+
             {
                 loading ? (
                     <PostLoading />
@@ -454,7 +471,7 @@ const BusinessAccountBusinessOwner = () => {
                                 LoadingWallpaper ? (
                                     <Loadings />
                                 ) : (
-                                    < img src={BASE_Image_Url + Wallpaer} height='100%' width='100%' />
+                                    < img src={Wallpaer? BASE_Image_Url + Wallpaer : DEFAULT_WALLPAPER} height='100%' width='100%' />
                                 )
 
                             ) : (
@@ -500,7 +517,9 @@ const BusinessAccountBusinessOwner = () => {
                         <TextareaAutosize
                             value={Biography}
                             disabled
-                            className="paragraphPost2"
+                            // className="paragraphPost2"
+                            // className="biographytitle2"
+                            className={classes.biographytitle}
                             style={{ marginBottom: '30px' }}
                         />
 
@@ -520,6 +539,7 @@ const BusinessAccountBusinessOwner = () => {
                                         Icon={<ChatOutlinedIcon />}
                                     />
                                 </Button>
+
                                 <Button
                                     onClick={() => router.push(`https://www.instagram.com/${Instagram}`)}
                                 >
