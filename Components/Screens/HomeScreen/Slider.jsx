@@ -45,7 +45,7 @@ const useStyles = makeStyles({
   }
 });
 
-const MainSlider = () => {
+const MainSlider = ({type=0}) => {
   const classes = useStyles();
 
   // mrx : context
@@ -69,7 +69,7 @@ const MainSlider = () => {
   // mrx : get sliders
   useEffect(() => {
     // mrx : get Province
-    GetUrl(GET_SLIDER_BY_CITY_ID + `?cityId=${Cookies.get("CITID")}`, {
+    GetUrl(GET_SLIDER_BY_CITY_ID + `?cityId=${Cookies.get("CITID")}&type=${type}`, {
       cityId: cityId
     }).then((res) => {
       if (res && res.status === 200) {

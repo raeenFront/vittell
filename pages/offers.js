@@ -19,6 +19,7 @@ import Btn from '../Components/Common/Button';
 import BlogBox from '../Components/Common/BlogBox';
 import ProvinceAndCity from '../Components/Common/ProvinceAndCity';
 import TitleBox from '../Components/Common/TitleBox';
+import DiscountSlider from '../Components/Screens/HomeScreen/Discount/DiscountSlider';
 
 // mrx : api links
 import {
@@ -28,6 +29,7 @@ import {
 
 // mrx : api
 import { PostAuthUrl, GetUrl, GetAuthUrl } from '../pages/api/config';
+import MainSlider from '../Components/Screens/HomeScreen/Slider';
 
 //my variables
 const primary = theme.palette.primary.main;
@@ -70,11 +72,13 @@ const NormalUserProfileIndex = () => {
   return (
     <Container
       maxWidth='sm'
-      style={{
-        paddingTop: 80
-      }}
+      // style={{
+      //   paddingTop: 80
+      // }}
     >
-
+      <Container maxWidth='sm' >
+        <MainSlider type={1} />
+      </Container>
       <Box
         my={2}
         style={{ marginBottom: "40px" }}
