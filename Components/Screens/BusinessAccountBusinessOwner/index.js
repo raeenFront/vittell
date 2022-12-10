@@ -820,7 +820,7 @@ const BusinessAccountBusinessOwner = () => {
                                 id="demo-simple-select-outlined222"
                                 onChange={(e) => setCityId(e.target.value)}
                             >
-                                <option>{City?.filter(a=>a.id === CityId)?.[0]?.name}</option>
+                                <option>{CityValue}</option>
                                 {City && City?.map((item) => <option key={item?.id} value={item?.id}>{item?.name}</option>)}
                             </select>
 

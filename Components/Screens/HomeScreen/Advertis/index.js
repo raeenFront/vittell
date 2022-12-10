@@ -23,6 +23,7 @@ import { PostUrl, GetUrl } from "../../../../pages/api/config";
 
 // context
 import { Contexts } from '../../../../contexts/index';
+import { getFontOverrideCss } from "next/dist/server/font-utils";
 
 // mrx: colors
 const primary = theme.palette.primary.main;
@@ -49,25 +50,31 @@ const AdvertisIndex = () => {
         })
     // }, 2000)
     })
-
+const getHomePost=()=>{
+    // mrx : get Province
+    GetUrl(GET_POSTS_HOME_PAGE_BY_CITY_ID + `?cityId=${Cookies.get("CITID")}`,
+    {
+        cityId: Cookies.get("CITID")
+    }
+).then((res) => {
+    if (res && res.status === 200) {
+        // mrx : changing data to json
+        const data = res.data.data;
+        setHomePosts(data);
+        setPostLeinght(data?.length);
+        setLoadingAdvertis(false);
+    }
+});
+}
     // mrx : get sliders
     useEffect(() => {
 
-        // mrx : get Province
-        GetUrl(GET_POSTS_HOME_PAGE_BY_CITY_ID + `?cityId=${Cookies.get("CITID")}`,
-            {
-                cityId: Cookies.get("CITID")
-            }
-        ).then((res) => {
-            if (res && res.status === 200) {
-                // mrx : changing data to json
-                const data = res.data.data;
-                setHomePosts(data);
-                setPostLeinght(data?.length);
-                setLoadingAdvertis(false);
-            }
-        });
+        getHomePost();
     }, []);
+
+    useEffect(()=>{
+        getHomePost();
+    },[cityId])
 
     return (
         <Container

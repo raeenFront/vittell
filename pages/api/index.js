@@ -8,9 +8,11 @@ export const DEFAULT_WALLPAPER = "/images/Placeholder.PNG";
 
 // mrx : base url
 export const BASE_URL = `https://vitell.arezouarmina.ir/api`;
+// export const BASE_URL = `https://localhost:5001/api`;
 
 // mrx : base image url
 export const BASE_Image_Url = `https://vitell.arezouarmina.ir`;
+// export const BASE_Image_Url = `https://localhost:5001`;
 
 // const export const POSTS = `${BASE_URL}/posts/`;
 export const LOGIN_USER = `${BASE_URL}/Authenticate/Login`;

@@ -252,7 +252,7 @@ const Header = ({ test }) => {
     const classes = useStyles();
     const router = useRouter()
 
-    const { setDefultCity, DefultCity } = useContext(Contexts);
+    const { setDefultCity, DefultCity ,cityId , setcityId} = useContext(Contexts);
 
     // mrx : state
     const [age, setAge] = React.useState('');
@@ -301,10 +301,10 @@ const Header = ({ test }) => {
                 // }
                 // Cookies.set("CITN", data?.name);
                 setCityValue2(data?.name);
-                console.log("fuck " + data?.name);
                 setcityname(data?.name);
                 // if (Cookies.get("tm3fn4t867oehg4863ftbkijuhy34gvfeiu736t4n")) {
                 setCityIdH(data?.id);
+                setcityId(data?.id);
                 // }
                 setProvinceValue(data?.provinceName);
                 setProvinceId(data?.provinceId)
@@ -371,7 +371,6 @@ const Header = ({ test }) => {
     }, []);
 
     useEffect(() => {
-        console.log("s" + cityname);
         if (cityname?.length > 3) {
             Cookies.set("CITN", cityname);
         }
@@ -437,10 +436,13 @@ const Header = ({ test }) => {
         setCityIdH(e.target.value);
         Cookies.set("ISFIRST", e.target.value);
         Cookies.set("ISDefult", false);
-        Cookies.set("CITN", JSON.stringify(City?.filter((item) => item?.id === e.target.value)[0]?.name) ?? "شهر من");
-        setTimeout(function () {
-            router.reload();
-        }, 2000);
+        Cookies.set("CITN", City?.filter((item) => item?.id === e.target.value)[0]?.name ?? "شهر من");
+        // Cookies.set("CITN", JSON.stringify(City?.filter((item) => item?.id === e.target.value)[0]?.name) ?? "شهر من");
+        setcityId(e.target.value);
+        setShowModalCity(false);
+        // setTimeout(function () {
+        //     router.reload();
+        // }, 2000);
     }
 
     const ShowCity = () => {

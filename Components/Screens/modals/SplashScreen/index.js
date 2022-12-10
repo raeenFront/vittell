@@ -27,7 +27,8 @@ import Modal from '@material-ui/core/Modal';
 import BackIcon from "@material-ui/icons/ArrowBackIos"
 import { route } from 'next/dist/server/router';
 import TextFieldItem from '../../../Common/TextFieldItem';
-import BackGround from '../../../../public/splash.jpg';
+import BackGround from '../../../../public/vittell-welcome-03.png';
+// import BackGround from '../../../../public/splash.jpg';
 
 
 

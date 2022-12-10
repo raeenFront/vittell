@@ -220,6 +220,13 @@ const AddPostIndex = () => {
     const handleSetImage = (e) => {
         setPicture(e.target.files[0]);
         setImage(e.target.files[0] && URL.createObjectURL(e.target.files[0]));
+        // let img = new Image();
+        // var _URL = window.URL || window.webkitURL;
+        // var objectUrl = _URL.createObjectURL(e.target.files[0]);
+        // img.src = e.target.files[0];
+        // img.onload=function(){
+
+        // }
         setButtonType(false);
         if (e.target.files[0] == undefined) {
             setImage("../images/Placeholder.PNG");
@@ -242,7 +249,7 @@ const AddPostIndex = () => {
             setAddPostLoad(false)
         } else {
             PostAuthUrl(ADD_POST_AUTH, {
-                Title: Title.subString(0,40),
+                Title:Title?.length>40? Title?.substring(40):Title,
                 Description: Description,
                 Price: Price ? parseInt(Price) : 0,
                 // DisPrice: DisCount ? parseInt(DisCount) : 0,
@@ -266,7 +273,7 @@ const AddPostIndex = () => {
         setLoading(true);
         const PictureFile = new FormData();
         PictureFile.append("file", Picture);
-        PostAuthUrl(UPLOAD_POST_IMAGE_BY_ID + `?id=${Cookies.get("PostID")}&x=${PicDt?.x}&y=${PicDt?.y}&width=${PicDt?.w}&height=${PicDt?.h}`,
+        PostAuthUrl(UPLOAD_POST_IMAGE_BY_ID + `?id=${Cookies.get("PostID")}&x=${0}&y=${0}&width=${0}&height=${0}`,
             PictureFile
         ).then((res, err) => {
             if (res && res.status === 200) {

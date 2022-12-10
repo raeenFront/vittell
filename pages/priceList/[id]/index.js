@@ -209,7 +209,7 @@ const PriceList = () => {
 
       {/* top */}
       <ShowProfile data={UserInfo} />
-      <PriceListView id={userId} />
+      <PriceListView id={userId} qrCodeImage={UserInfo?.qrCodeUrl} />
 
     </Container >
   );

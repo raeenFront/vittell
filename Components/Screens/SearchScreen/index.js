@@ -54,6 +54,9 @@ const SearchScreenIndex = () => {
   const classes = useStyles();
   const router = useRouter();
 
+  //Context 
+  const {cityId} = useContext(Contexts);
+
   // mrx : state
   const { setSearchUser } = useContext(Contexts);
   const [SearchType, setSearchType] = React.useState(1);
@@ -112,7 +115,7 @@ const SearchScreenIndex = () => {
       if (status !== 1) {
         setLoadingPost(true);
         // mrx : Search
-        GetUrl(GET_ALL_SEARCH_USERS + `?name=${Search ? Search : ""}&provinceId=${ProvinceId}&cityId=${CityId}&categoryId=${category?.id ? category?.id : null}`)
+        GetUrl(GET_ALL_SEARCH_USERS + `?name=${Search ? Search : ""}&provinceId=${ProvinceId}&cityId=${Cookies.get("CITID")}&categoryId=${category?.id ? category?.id : null}`)
           .then((res, err) => {
             if (res && res.status === 200) {
               const data = res.data.data;
@@ -133,6 +136,10 @@ const SearchScreenIndex = () => {
       smooth: 'easeInOutQuint',
     }, 2000)
   }, [LoadingPost])
+
+  useEffect(()=>{
+    handleSearch(2);
+  },[cityId])
 
   useEffect(() => {
     setSearch(SearchInputs?.title);
@@ -242,11 +249,11 @@ const SearchScreenIndex = () => {
           />
         </Box>
         {
-          // category && category.name && (
+          category && category.name && (
 
-          //   <DeleteIcon onClick={()=>{setCategory({name:''})}}
-          //     style={{position:'absolute',left:'11%',marginTop:'7%',color:'red'}} />
-          // )
+            <DeleteIcon onClick={()=>{setCategory({name:''})}}
+              style={{position:'absolute',left:'11%',marginTop:'-10%',color:'red'}} />
+          )
         }
 
 

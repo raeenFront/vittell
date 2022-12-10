@@ -56,8 +56,7 @@ const DiscountSlider = () => {
   const [offerSlider, setOfferSlider] = useState([]);
   const [LoadingDisCount, setLoadingDisCount] = useState(true);
 
-  // mrx : get sliders
-  useEffect(() => {
+  const getOffers=()=>{
     // mrx : get Province
     GetUrl(GET_OFFER_SLIDER_BY_CITY_ID + `?cityId=${Cookies.get("CITID")}`, {
       cityId: cityId
@@ -68,7 +67,14 @@ const DiscountSlider = () => {
         setLoadingDisCount(false);
       }
     });
+  }
+  // mrx : get sliders
+  useEffect(() => {
+    getOffers();
   }, []);
+  useEffect(()=>{
+    getOffers();
+  },[cityId])
 
   return (
     <>

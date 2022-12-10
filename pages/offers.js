@@ -30,6 +30,7 @@ import {
 // mrx : api
 import { PostAuthUrl, GetUrl, GetAuthUrl } from '../pages/api/config';
 import MainSlider from '../Components/Screens/HomeScreen/Slider';
+import { Contexts } from '../contexts';
 
 //my variables
 const primary = theme.palette.primary.main;
@@ -43,6 +44,8 @@ const NormalUserProfileIndex = () => {
   // mrx : state
   const [LoadingPost, setLoadingPost] = useState(true);
   const [OfferPost, setOfferPost] = useState([]);
+  //Context 
+  const { cityId } = useContext(Contexts);
 
   const PostID = typeof window !== "undefined" ? localStorage.getItem("PostID") || '1' : '1';
 
@@ -54,8 +57,7 @@ const NormalUserProfileIndex = () => {
     // }, 2000)
   })
 
-  useEffect(() => {
-
+  const getData = () => {
     // mrx : get saves
     GetAuthUrl(GET_ALL_OFFER_POSTS + `?cityId=${Cookies.get("CITID")}`).then(res => {
       if (res && res.status === 200) {
@@ -66,15 +68,22 @@ const NormalUserProfileIndex = () => {
         toast.error(res?.data?.message);
       }
     })
+  }
+  useEffect(() => {
+
+    getData();
 
   }, [])
+  useEffect(()=>{
+    getData();
+  },[cityId])
 
   return (
     <Container
       maxWidth='sm'
-      // style={{
-      //   paddingTop: 80
-      // }}
+    // style={{
+    //   paddingTop: 80
+    // }}
     >
       <Container maxWidth='sm' >
         <MainSlider type={1} />

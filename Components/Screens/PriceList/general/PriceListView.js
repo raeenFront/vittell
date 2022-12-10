@@ -47,9 +47,9 @@ const useStyles = makeStyles({
         justifyContent: 'space-between',
     },
 });
-import { EDIT_PRICE_LIST, GET_USER_PRICE_LIST } from '../../../../pages/api';
+import { BASE_Image_Url, EDIT_PRICE_LIST, GET_USER_PRICE_LIST } from '../../../../pages/api';
 import { GetUrl, PostAuthUrl, PutAuthUrl } from '../../../../pages/api/config';
-const PriceListView = ({ id }) => {
+const PriceListView = ({ id, qrCodeImage }) => {
     const classes = useStyles();
 
     //for store the price list data
@@ -70,8 +70,8 @@ const PriceListView = ({ id }) => {
             }
         })
     }
-    const editPriceList=(data)=>{
-        PostAuthUrl(EDIT_PRICE_LIST,data).then(res => {
+    const editPriceList = (data) => {
+        PostAuthUrl(EDIT_PRICE_LIST, data).then(res => {
             if (res && res.status === 200) {
                 toast.success("با موفقیت ویرایش شد");
                 getPriceList();
@@ -128,16 +128,32 @@ const PriceListView = ({ id }) => {
                 isUser ?
                     <Box mt={5} width='100%' textAlign='center' className={classes.buttonSignUp} style={{ marginTop: '20px' }}>
                         <Box mb={2} mt={3} pb={2} style={{ textAlign: 'center', borderBottom: '2px solid #aaa' }}></Box>
-                        <Button style={{ margin: "0px 10px", color: "#fff", backgroundColor: "rgb(239 75 76)", borderRadius: '10px' }} onClick={() => setShowEditModal(true)} variant="contained" width='30%'>ویرایش</Button>
+                        <div style={{ display: 'flex', justifyContent: 'space-between',alignItems:'center' }}>
+                            <div style={{textAlign:'center',width:'50%'}}>
+                                <Button style={{ margin: "0px 10px", color: "#fff", backgroundColor: "rgb(239 75 76)", borderRadius: '10px' }} onClick={() => setShowEditModal(true)} variant="contained" width='30%'>ویرایش</Button>
+
+                            </div>
+                            {
+                                qrCodeImage !== null && (
+                                    <div style={{ width: '40%', textAlign: 'center' }}>
+                                        <img src={BASE_Image_Url + qrCodeImage} style={{ width: '100%' }} />
+                                        <Button style={{ margin: "0px 10px", color: "#fff", backgroundColor: "rgb(239 75 76)", borderRadius: '10px' }} onClick={()=>window.location.href=BASE_Image_Url + qrCodeImage}  variant="contained" width='30%'>
+                                        دانلود
+                                        </Button>
+
+                                    </div>
+                                )
+                            }
+                        </div>
                     </Box>
                     : <> </>
             }
             {showEditModal ?
                 <EditPrice data={priceList} handleModal={setShowEditModal} handleEdit={editPriceList} />
-                : <></> 
-        }
-                </>
+                : <></>
+            }
+        </>
     )
 }
 
-            export default PriceListView;
+export default PriceListView;

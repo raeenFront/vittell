@@ -66,8 +66,7 @@ const MainSlider = ({type=0}) => {
   const [slider, setSlider] = useState([]);
   const [LoadingSlider, setLoadingSlider] = useState(true);
 
-  // mrx : get sliders
-  useEffect(() => {
+  const getSlider=()=>{
     // mrx : get Province
     GetUrl(GET_SLIDER_BY_CITY_ID + `?cityId=${Cookies.get("CITID")}&type=${type}`, {
       cityId: cityId
@@ -79,7 +78,14 @@ const MainSlider = ({type=0}) => {
         setLoadingSlider(false);
       }
     });
+  }
+  // mrx : get sliders
+  useEffect(() => {
+    getSlider();
   }, []);
+  useEffect(()=>{
+    getSlider();
+  },[cityId]);
 
   return (
     <>
